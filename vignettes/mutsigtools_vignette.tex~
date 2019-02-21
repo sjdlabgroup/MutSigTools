@@ -1,0 +1,994 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Package MutSigTools},
+            pdfauthor={Vinod Singh, Neil Coleman and Subhajyoti De},
+            colorlinks=true,
+            linkcolor=blue,
+            citecolor=Blue,
+            urlcolor=Blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Package `MutSigTools'}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Vinod Singh, Neil Coleman and Subhajyoti De}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-02-20}
+
+\usepackage{setspace}\singlespacing
+\usepackage{float}
+
+\begin{document}
+\maketitle
+
+\renewcommand{\abstract}{}
+
+\begin{abstract}
+\doublespacing
+\noindent
+\textbf{Title}: MutSigTools\\
+\textbf{Type}: Package\\
+\textbf{Version}: 1.0.0\\
+\textbf{Description}: patterns of mutation accumulation in tumor genomes
+provide insights into past exposure to mutagens, mechanism of DNA
+damage, repair defects, and extent of genomic instability during
+development, aging, and cancer. A number of mutation signatures were
+initially identified using non-negative matrix-factorization-based
+approaches in analyzing cancer genomic data, providing insights into
+etiology of the malignant diseases. Subsequently additional mutation
+signatures have been identified using experimental and computational
+approaches. MutSigTools implements wide range of utilities for
+processing, analysis, and interpretation of somatic mutations and
+associated mutation\\
+\textbf{Author}: Vinod Singh, Neil Coleman and Subhajyoti De\\
+\textbf{Maintainer}: The package maintainer
+\href{mailto:vs580@scarletmail.rutgers.edu}{\nolinkurl{vs580@scarletmail.rutgers.edu}}\\
+\textbf{License}: GPL-2\\
+\textbf{Encoding}: UTF-8\\
+\textbf{LazyData}: true\\
+\textbf{Depends}: R (\textgreater{}= 3.4.0), bedr, gplots, factoextra,
+data.table, tools, stats, GenomicRanges, Biostrings, deconstructSigs.\\
+\textbf{RoxygenNote}: 6.1.1\\
+\textbf{Suggests}:devtools, knitr, rmarkdown.\\
+\textbf{VignetteBuilder}: knitr.\\
+\textbf{URL}: \url{https://github.com/sde/MutSigTools}\\
+\textbf{BugReports}: \url{https://github.com/sde/MutSigTools/issues}
+\end{abstract}
+
+\newpage
+
+\singlespacing
+\renewcommand{\contentsname}{R topics documented:}
+\tableofcontents
+
+\DeclareRobustCommand{\BSgenome_head}[1]{\texttt{#1}\index{BSgenome!#1}}
+\DeclareRobustCommand{\Vtest}[1]{\texttt{#1}\index{Vinod is texting!#1}}
+\DeclareRobustCommand{\Vtest}[1]{\texttt{#1}\index{Vinod is texting!#1}}
+\DeclareRobustCommand{\Vtest}[1]{\texttt{#1}\index{Vinod is texting!#1}}
+
+
+
+
+
+
+
+\subsection{1. Introduction:}\label{introduction}
+
+The patterns of mutation accumulation in tumor genomes provide insights
+into past exposure to mutagens, mechanism of DNA damage, repair defects,
+and extent of genomic instability during development, aging, and cancer.
+A number of mutation signatures were initially identified using
+non-negative matrix-factorization-based approaches in analyzing cancer
+genomic data, providing insights into etiology of the malignant diseases
+\citet{alexandrov2013signatures}. Subsequently additional mutation
+signatures have been identified using experimental and computational
+approaches \citet{liu2017mutational}. MutSigTools implements wide range
+of utilities for processing, analysis, and interpretation of somatic
+mutations and associated mutation signatures.
+
+\subsection{2. Availability and
+Installation}\label{availability-and-installation}
+
+The development version of \texttt{MutSigTools} package is available at
+\url{https://github.com/sde/MutSigTools} and can be installed as
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# install.packages("devtools")}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"sde/MutSigTools"}\NormalTok{,}\DataTypeTok{build_vignettes =} \OtherTok{TRUE}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{3. Functions}\label{functions}
+
+\hypertarget{vcfToSNV}{\subsubsection{3.1 vcfToSNV}\label{vcfToSNV}}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description}
+
+Reads a \texttt{vcf} formatted file to catalog mutations in a data frame
+of class snv for downstream analysis. A snv dataframe consists of
+\texttt{sample,\ chr,\ pos,\ ref,\ alt\ and/or\ freq} columns.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage}
+
+\texttt{vcfToSNV(vcf,\ allelefreq\ =\ FALSE)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{vcf}: The \texttt{path} of a standard \texttt{vcf\ file}.
+\item
+  \texttt{allelefreq}: A logical input, TRUE if need mutated allel
+  frequency is required in output object. \texttt{Default:\ FALSE}
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details}
+
+Read vcf formatted file to catalog mutations in a data frame of class
+snv for downstream analysis for each input sample.
+
+\hypertarget{snv}{\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{snv}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{snv} is a dataframe with columns
+  \texttt{sample,\ chr,\ pos,\ ref,\ alt,\ and/or\ freq}. Where,
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{sample} : Name of the sample name.
+  \item
+    \texttt{chr} : chromosome number
+  \item
+    \texttt{pos} : position of mutation
+  \item
+    \texttt{ref} : Reference base (mutated from)
+  \item
+    \texttt{alt} : mutated base (mutated to)
+  \item
+    \texttt{freq} : Alt Allele Frequency (optional)
+  \end{itemize}
+\end{enumerate}
+
+Note: \texttt{vcf\ file\ name} with no extension will be the
+\texttt{sample\ name}.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples}
+
+\begin{verbatim}
+> vcf_file=system.file("extdata", "test.vcf", package = "MutSigTools", mustWork = TRUE) 
+> snv=vcfToSNV(vcf=vcf_file, allelefreq=TRUE)
+> head(snv)
+     sample  chr   pos ref alt     freq
+1 CRF004556 chr1 15118   A   G 1.000000
+2 CRF004556 chr1 15211   T   G 0.935484
+3 CRF004556 chr1 15237   C   T 0.153846
+4 CRF004556 chr1 16497   A   G 0.833333
+5 CRF004556 chr1 16534   C   T 1.000000
+6 CRF004556 chr1 16571   G   A 1.000000
+\end{verbatim}
+
+\subsubsection{3.2 contextSNV}\label{contextsnv}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-1}
+
+Group mutations according to their occurrence within or outside
+user-annotated genomic segments.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-1}
+
+\texttt{contextSNV(snv,\ file\ =\ "empty",\ mode\ =\ "include")}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{snv}{\texttt{snv}}: A dataframe having
+  \texttt{sample,\ chr,\ pos,\ ref,\ alt\ and/or\ freq} as its columns.
+  This snv dataframe can be created by
+  \protect\hyperlink{vcfToSNV}{vcfToSNV} function of this package.
+\item
+  \texttt{file}: Path of the \texttt{BED\ file}, having genomic segments
+  and their context information.
+\item
+  \texttt{mode}: Default: \texttt{include}: Select mutations lying
+  inside the given genomic contexts (obtained from BED file).
+  \texttt{exclude}: will give mutations outside the given context.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-1}
+
+When the \texttt{include} mode is used, group mutations according to
+their occurrence in user-specified annotated genomic segments; such
+segments could represent specific genomic or epigenomic contexts
+(e.g.~actively transcribed coding regions). Alternately, in the
+\texttt{exclude} mode, mutations in undesired regions (e.g.black-listed
+genomic regions) can be removed.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value}
+
+\texttt{snv} dataframe with column names of
+\texttt{sample,\ chr,\ pos,\ ref,\ alt,\ freq}. Where, sample name will
+be concatenated by the its genomic context. Example: if a mutation
+within a sample of name \texttt{sample1}, lies in the context segment of
+label \texttt{C1} given in the input \texttt{bed\ file} , the sample
+name of mutation is modified to \texttt{sample1\_C1}. The mutations that
+don't lie in any context segment given in the \texttt{bed\ file} are
+discarded.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-1}
+
+\begin{verbatim}
+> BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools", mustWork = TRUE)
+> load(file = "data/snv_sample.rda")   # load 'snv' dataframe object
+> context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
+> head(context_snv)
+        sample  chr   pos ref alt
+1 CRF004556_E7 chr1 15118   A   G
+2 CRF004556_E7 chr1 15211   T   G
+3 CRF004556_E7 chr1 15237   C   T
+4 CRF004556_E7 chr1 16497   A   G
+5 CRF004556_E7 chr1 16534   C   T
+6 CRF004556_E7 chr1 16571   G   A
+\end{verbatim}
+
+\subsubsection{3.3 processSNV}\label{processsnv}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-2}
+
+Estimate frequency of point mutations in user-specified nucleotide motif
+contexts (e.g.~trinucleotide motifs) for one or more input samples.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-2}
+
+\texttt{processSNV(snv,\ bsg\ =\ BSgenome.Hsapiens.UCSC.hg19::Hsapiens)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-2}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{snv}{\texttt{snv}}: A dataframe having sample, chr,
+  pos, ref, alt and/or freq as its columns. The \texttt{snv} dataframe
+  can be created by \protect\hyperlink{vcfToSNV}{\texttt{vcfToSNV}}
+  function.
+\item
+  \texttt{bsg}: An boject of class \Vtest{BSGenome}. \texttt{Default:}
+  \href{https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html}{BSgenome.Hsapiens.UCSC.hg19::Hsapiens}
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-2}
+
+Estimation of mutation frequency in pre-determined, user-specified
+nucleotide motif contexts for input samples. The BSgenome object
+contains the reference genome information, and should be specified for
+alternative assembly of human genomes or nonhuman reference genomes. The
+output returns a data frame containing estimated mutation frequencies in
+the different genomic contexts, as provided in the sigmat object, for
+each input sample.
+
+\hypertarget{contextfreq}{\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{contextfreq}}
+
+A data frame of class \texttt{contextfreq} containing mutation frequency
+in user-specified nucleotide contexts.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-2}
+
+\begin{verbatim}
+> load(file = "data/snv_sample.rda")
+> context.freq=processSNV(snv=snv_sample, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
+> context.freq[,1:6]   # view first 6 mutation frequency contexts of 96
+          A[C>A]A A[C>A]C A[C>A]G A[C>A]T C[C>A]A C[C>A]C
+CRF004556    1920    1412     653    1180    1845    1439
+\end{verbatim}
+
+\subsubsection{3.4 addSignature}\label{addsignature}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-3}
+
+Add new signature(s) to an existing set of mutation signatures, and
+return the updated signature set.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-3}
+
+\texttt{addSignature(sigmatrix1,\ sigmatrix2)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{mutsig}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmatrix1}: An object of class \texttt{mutsig} describing the
+  existing set of signatures.
+\item
+  \texttt{sigmatrix2}: An object of class \texttt{mutsig} describing the
+  new signature.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-1}
+
+The list of mutational signatures with the new signature added.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-3}
+
+\begin{verbatim}
+> newSigMatrix=addSignature(sigmatrix2, sigmatrix1)
+\end{verbatim}
+
+\subsubsection{3.5 deleteSignature}\label{deletesignature}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-4}
+
+Delete selected signatures from an existing set of mutation signatures.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-4}
+
+\texttt{deleteSignature(sigmatrix,\ del\_sig)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-3}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmatrix}: An object of class \texttt{mutsig} describing the
+  existing set of signatures.
+\item
+  \texttt{del\_sig}: Signature(s) to be removed.
+\end{itemize}
+
+\subparagraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-3}
+
+Deletion of one or more mutation signatures from an existing set of
+mutation signatures upon which the updated signature set is returned.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-2}
+
+An object of mutsig class with the deleted signatures.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-4}
+
+\begin{verbatim}
+> reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signature 2 and 5.
+\end{verbatim}
+
+\subsubsection{3.6 renameSignature}\label{renamesignature}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-5}
+
+Rename selected signatures from an existing set of signatures.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-5}
+
+\texttt{renameSignature(sigmatrix,selectSig,renameSig)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-4}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmatrix}: An object of class mutsig describing the existing
+  set of signatures.
+\item
+  \texttt{selectSig}: A vector containing name(s) of the signature(s) to
+  be removed.
+\item
+  \texttt{renameSig}: A vector containing updated name(s) of the
+  signatures.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-4}
+
+Renaming of selected mutation signatures to an existing signature set,
+upon which the updated signature set is returned.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-3}
+
+An object of \texttt{mutsig} class.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-5}
+
+\begin{verbatim}
+> renamedSigMatrix=renameSignature(sigmatrix=signatures.cosmic, selectSig=sig=c(2,5), 
+> renameSig=resig=c('two', 'five')) # rename signature 2 and 5.
+\end{verbatim}
+
+\subsubsection{3.7 mergeSignature}\label{mergesignature}
+
+\subparagraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-6}
+
+This function creates a new mutational signature by taking a linear
+combination of \texttt{k} other signatures s\textsubscript{11},
+s\textsubscript{12},\ldots{},s\textsubscript{kn} located in a matrix of
+mutational signatures. In order to use this function, a weight vector
+w\textsubscript{1}, w\textsubscript{2},\ldots{},w\textsubscript{k} must
+be specified. The new mutational signature is created by multiplying the
+component signature values by the corresponding weights. The formula for
+the entries of the new signature is
+s\textsubscript{11}w\textsubscript{1}+s\textsubscript{21}w\textsubscript{2}+\ldots{}+s\textsubscript{k1}w\textsubscript{k},
+s\textsubscript{12}w\textsubscript{1}+s\textsubscript{22}w\textsubscript{2}+\ldots{}+s\textsubscript{k2}w\textsubscript{k},\ldots{},s\textsubscript{1n}w\textsubscript{1}+s\textsubscript{2n}w\textsubscript{2}+\ldots{}+s\textsubscript{kn}w\textsubscript{k}.
+The function returns this new signature plus all of the signatures in
+the original dataset that were not merged into the new matrix of
+signatures.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-6}
+
+\texttt{mergeSignature(sigmatrix,sig,weights)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-5}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmatrix}: A \texttt{mutsig} object of mutational signatures.
+\item
+  \texttt{sig}: A vector that describes the signatures to be merged
+\item
+  \texttt{weights}: A vector that describes the relative weights of each
+  of the component signatures in the merged mutational signature.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-4}
+
+A new matrix of signatures consisting of the signatures in the original
+matrix of mutational signatures that were not merged as well as the
+mutational signature that is a result of merging the input signatures.
+For example, if there were 10 signatures in the original signature
+matrix and signatures 1-6 were set to be merged, then the output value
+would be a matrix of 5 signatures(signature 7,8,9,10 and the result of
+merging signatures 1-6).
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-6}
+
+\begin{verbatim}
+> weights=rep(1/27,27)      
+> mergeSignature(signatures.cosmic,1:27,weights)
+> # another example
+> weights=rep(1/6,6)  
+> mergeSignatures(signatures.cosmic,1:6,weights)   
+\end{verbatim}
+
+\subsubsection{3.8 clusterSignature}\label{clustersignature}
+
+Performs a hierarchical clustering analysis of an input mutational
+signature matrix using the Euclidean distance metric.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-7}
+
+\texttt{clusterSignature(sigmatrix)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-6}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmatrix}: An input matrix of mutational signatures.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-5}
+
+A hierarchical clustering object formed from the input matrix of
+mutational signatures. This can then be plotted to show how the
+mutational signatures in the input matrix are related to one another.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-7}
+
+\begin{verbatim}
+> hclust_obj=clusterSignature(sigmatrix=signatures.cosmic) 
+\end{verbatim}
+
+\subsubsection{3.9 signatureHeatmap}\label{signatureheatmap}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-7}
+
+Construct a heatmap showing relative weights of tri-nucleotide motif for
+different mutation signatures.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-8}
+
+\texttt{signatureHeatmap(sigmat,\ pngfile=...,\ )}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-7}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmat}: An object of class \texttt{mutsig} describing the
+  existing set of signatures.
+\item
+  \texttt{pngfile}: The name of \texttt{png} formatted image file to be
+  created.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-5}
+
+Create a heatmap to show relative weights of trinucleotide motifs for
+different mutation signatures in a signature-set. It is possible to use
+alternative motifs such as penta-nucleotide motifs etc.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-6}
+
+A png formatted image file.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-8}
+
+\begin{verbatim}
+> sigmat=signatures.cosmic
+> signatureHeatmap(sigmat, pngfile="signature", mar=c(6,8)
+\end{verbatim}
+
+\subsubsection{3.10 signaturePCA}\label{signaturepca}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-8}
+
+Constructs three PCA plots showing variations among the signatures in
+terms of the weights of the principal components for different mutation
+signatures, as well as the eigenvalues and cosine similarity among
+expected and actual signatures.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-9}
+
+\texttt{signaturePCA(sigmat,\ pngfile=...,\ )}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-8}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmat}: An object of class \texttt{mutsig} describing a set
+  of signatures.
+\item
+  \texttt{pngfile}: Name of \texttt{png} formatted image file to be
+  created.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-7}
+
+Create three \texttt{PCA\ plots} with the following extensions to show
+difference among mutational signatures.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{*\_Eigen.png} : The eigenvalues of the PCA and the relative
+  amount of the variation each eigenvalue.
+\item
+  \texttt{*\_var.png} : The different single-nucleotide alteration
+  components in terms of the two dimensions.
+\item
+  \texttt{*\_PCA.png} : The different signatures in terms of the 2
+  non-dimensional vectors derived by the PCA analysis and the cosine
+  similarity between the estimate of each mutation signature using PCA
+  and the actual mutation signature(in order to determine how accurately
+  the 2 dimensions calculated by PCA represent the mutational
+  signatures).
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-9}
+
+\begin{verbatim}
+> sigmat=signatures.cosmic
+> signaturePCA(sigmat, pngfile="signature")
+\end{verbatim}
+
+\subsubsection{3.11 confidenceSig}\label{confidencesig}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-9}
+
+Provides an interval of uncertainty for estimated weights of known
+mutation signatures in the catalog of mutations from a set of samples.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-10}
+
+\texttt{confidenceSig(contextfreq.sample,\ subsample=0.8,\ iter=1000\ ,\ signatures.ref=signatures.cosmic,\ lbound=0.1,\ ubound=0.9)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-9}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{contextfreq.sample}: A data frame of class
+  \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
+  mutation frequency in trinucleotide contexts.
+\item
+  \texttt{subsample}: Proportion of mutations included during each
+  subsampling. \texttt{Default:\ 0.8} (80 percent)
+\item
+  \texttt{iter}: Number of iterations of subsampling.
+  \texttt{Default:\ 1000}
+\item
+  \texttt{signatures.ref}: An object of class mutsig comprising the set
+  of signatures. Default:
+  \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic}
+\item
+  \texttt{lbound}: Lower bound of the interval of uncertainty for
+  estimated weights of the signatures. \texttt{Default:\ 0.1} (10
+  percent)
+\item
+  \texttt{ubound}: Upper bound of the interval of uncertainty for
+  estimated weights of the signatures. \texttt{Default:\ 0.9} (90
+  percent)
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-6}
+
+Provides an interval of uncertainty for estimated weights of known
+mutation signatures in the catalog of mutations from a set of samples.
+First, based on the catalog of mutations in a sample, weights of the
+mutation signatures are estimated. Next, mutations are subsampled
+iteratively without replacement, each time estimating the weights of the
+mutation signatures. The intervals of uncertainty for weights of each
+mutation signatures are determined by aggregating observations from a
+given number of iterations.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-8}
+
+An object containing the following information:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{observed.weights} : A data frame containing estimated weights
+  of known mutation signatures based on all mutations in a sample.
+\item
+  \texttt{median.weights} : A data frame containing estimated median of
+  the weights of known mutation signatures based on iteratively
+  subsampled mutations.
+\item
+  \texttt{ubound.weights} : A data frame containing upper-bound values
+  of the weights of known mutation signatures based on iteratively
+  subsampled mutations.
+\item
+  \texttt{lbound.weights}: : A data frame containing lower-bound values
+  of the weights of known mutation signatures based on iteratively
+  subsampled mutations.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-10}
+
+\begin{verbatim}
+> load(file = "data/contextfreq.sample_test.rda")
+> robust_sig_object=confidenceSig(contextfreq.sample=contextfreq.sample_test, subsample=0.8, iter=50, 
+signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)
+\end{verbatim}
+
+\subsubsection{3.12 persistSig}\label{persistsig}
+
+Determine the burden of different mutation signatures acrross different
+allele frequency ranges.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-11}
+
+\texttt{persistSig(snv,\ th\_vec\_lw,\ th\_vec\_up,\ bsg\ =\ NULL)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-10}
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{vcfToSNV}{\texttt{snv}}: A dataframe having
+  \texttt{sample,\ chr,\ pos,\ ref,\ alt\ and/or\ freq} as its
+  columns.This dataframe may have more than one sample.
+\item
+  \texttt{th\_vec\_lw}: A vector of lower limits of frequency ranges.
+\item
+  \texttt{th\_vec\_up}: A vector of upper limits of frequency ranges.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-9}
+
+A list of samples having mutational signature corresponding to each
+allele frequency range
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-11}
+
+\begin{verbatim}
+> load(file = "data/snv_sample.rda")   # load 'snv' dataframe object
+> mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1))  # list of samples having mutational signature for each allele frequency range i.e., in this example frequency ranges are (0.0 - 0.1) & (0.4 - 1.0).
+
+> mut_sig_per_freq_range$CRF004556[,1:6] # view some signatures at different allele freq ranges
+           sig.1 sig.2     sig.3 sig.4      sig.5      sig.6
+0-0.1 0.02644092     0 0.6242417     0 0.00000000 0.00000000
+0.4-1 0.19941897     0 0.2126304     0 0.09984891 0.08473515
+\end{verbatim}
+
+\subsubsection{3.13 enrichSig}\label{enrichsig}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-10}
+
+Determine over-represented mutation signatures in individual case
+sample(s) relative to that in the panel of control samples. This is
+suitable when case samples are heterogeneous, and only some of them
+might have excess of certain mutation signatures of interest relative to
+the control population.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-12}
+
+\texttt{enrichSig(contextfreq.cases,\ contextfreq.controls,\ signatures.ref=signatures.cosmic,\ threshold=0.05)}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-11}
+
+\begin{itemize}
+\item
+  \texttt{contextfreq.cases}: A data frame of class
+  \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
+  mutation frequency in tri-nucleotide contexts in case samples
+\item
+  \texttt{contextfreq.controls}: A data frame of class
+  \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
+  mutation frequency in tri-nucleotide contexts in control samples.
+\item
+  \texttt{signatures.ref}: An object of class mutsig comprising the set
+  of signatures. Default:
+  \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic}
+\item
+  \texttt{threshold}: Threshold for uncorrected percentile score.
+  \texttt{Default:\ 0.05}
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-7}
+
+Determine over-represented mutation signatures in individual case
+sample(s), highlighting those that are significantly enriched. The
+extent of enrichment is indicated using a percentile score, with low
+scores indicating high enrichment for specific mutation signatures in a
+case sample relative to that in the panel of control samples.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-10}
+
+An object of class \texttt{enrichSig.obj} providing the following
+information:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{n.case}: Number of case samples.
+\item
+  \texttt{n.control}: Number of control samples.
+\item
+  \texttt{case.weights}: A data frame containing estimated weights of
+  known mutation signatures in the case samples.
+\item
+  \texttt{control.weights}: A data frame containing estimated weights of
+  known mutation signatures in the control samples.
+\item
+  \texttt{case.percentile}: Percentile scores corresponding to the
+  extent of enrichment of known mutation signatures in case sample(s)
+  relative to that in the control samples.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-8}
+
+Determine over-represented mutation signatures in individual case
+sample(s), highlighting those that are significantly enriched. The
+extent of enrichment is indicated using a percentile score, with low
+scores indicating high enrichment for specific mutation signatures in a
+case sample relative to that in the panel of control samples.
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-12}
+
+\begin{verbatim}
+> load(file = "data/contextfreq.cases_test.rda")
+> load(file = "data/contextfreq.controls_test.rda")
+> enrich_obj=enrichSig(contextfreq.case=contextfreq.sample_test, contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, threshold=0.05)
+\end{verbatim}
+
+\subsubsection{3.14 caseControlSig}\label{casecontrolsig}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-11}
+
+Identify signatures with significantly higher mutation burden in case
+samples over control samples.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-13}
+
+\texttt{caseControlSig(contextfreq.cases,\ contextfreq.controls,\ signatures.ref=signatures.cosmic,\ threshold=0.05,\ adjust="fdr")}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-12}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{contextfreq.cases}: A data frame of class
+  \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
+  mutation frequency in tri-nucleotide contexts in case samples
+\item
+  \texttt{contextfreq.controls}: A data frame of class
+  \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
+  mutation frequency in tri-nucleotide contexts in control samples.
+\item
+  \texttt{signatures.ref}: An object of class mutsig comprising the set
+  of signatures. Default:
+  \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic}
+\item
+  \texttt{threshold}: Threshold for uncorrected percentile score.
+  \texttt{Default:\ 0.05}
+\item
+  \texttt{adjust}: Method for p-value correction for multiple testing.
+  Options are as provided in the function \texttt{p.adjust}. The default
+  method is the \texttt{FDR} method.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-9}
+
+Identifes signatures with significantly higher mutation burden in case
+samples campared to control samples using the
+\href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/wilcox.test}{Wilcoxon
+Rank sum test}. This is suitable when the samples are homogeneous within
+respective groups, and signatures significantly over-represented in
+cases relative to the controls are of interest.
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-11}
+
+An object providing the following information:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{n.case} : Number of case samples.
+\item
+  \texttt{n.control}: Number of control samples.
+\item
+  \texttt{case.weights}: A data frame containing estimated weights of
+  known mutation signatures in the case samples.
+\item
+  \texttt{control.weights}: A data frame containing estimated weights of
+  known mutation signatures in the control samples.
+\item
+  \texttt{p.value} : Indicates statistical significance of higher
+  mutation burden of signatures in cases over controls.
+\item
+  \texttt{adjust.p.value}: P-values adjusted for multiple testing
+  correction.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-13}
+
+\begin{verbatim}
+> load(file = "data/contextfreq.cases_test.rda")
+> load(file = "data/contextfreq.controls_test.rda")
+> signif_signatures_obj=caseControlSig(contextfreq.cases=contextfreq.cases_test, 
+contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, 
+threshold=0.05, adjust="fdr")
+
+\end{verbatim}
+
+\bibliography{bibliography.bib}
+
+\printindex
+
+\end{document}
