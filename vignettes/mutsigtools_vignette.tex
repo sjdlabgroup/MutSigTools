@@ -150,21 +150,11 @@
 \textbf{Title}: MutSigTools\\
 \textbf{Type}: Package\\
 \textbf{Version}: 1.0.0\\
-\textbf{Description}: patterns of mutation accumulation in tumor genomes
-provide insights into past exposure to mutagens, mechanism of DNA
-damage, repair defects, and extent of genomic instability during
-development, aging, and cancer. A number of mutation signatures were
-initially identified using non-negative matrix-factorization-based
-approaches in analyzing cancer genomic data, providing insights into
-etiology of the malignant diseases. Subsequently additional mutation
-signatures have been identified using experimental and computational
-approaches. MutSigTools implements wide range of utilities for
-processing, analysis, and interpretation of somatic mutations and
-associated mutation\\
+\textbf{Description}: MutSigTools implements a wide range of generic utilities for processing and analysis of mutation signatures.\\
 \textbf{Author}: Vinod Singh, Neil Coleman and Subhajyoti De\\
 \textbf{Maintainer}: The package maintainer
 \href{mailto:vs580@scarletmail.rutgers.edu}{\nolinkurl{vs580@scarletmail.rutgers.edu}}\\
-\textbf{License}: GPL-2\\
+\textbf{License}: MIT + file LICENSE\\
 \textbf{Encoding}: UTF-8\\
 \textbf{LazyData}: true\\
 \textbf{Depends}: R (\textgreater{}= 3.4.0), bedr, gplots, factoextra,
@@ -172,8 +162,8 @@ data.table, tools, stats, GenomicRanges, Biostrings, deconstructSigs.\\
 \textbf{RoxygenNote}: 6.1.1\\
 \textbf{Suggests}:devtools, knitr, rmarkdown.\\
 \textbf{VignetteBuilder}: knitr.\\
-\textbf{URL}: \url{https://github.com/sde/MutSigTools}\\
-\textbf{BugReports}: \url{https://github.com/sde/MutSigTools/issues}
+\textbf{URL}: \url{https://github.com/sjdlabgroup/MutSigTools}\\
+\textbf{BugReports}: \url{https://github.com/sjdlabgroup/MutSigTools/issues}
 \end{abstract}
 
 \newpage
@@ -215,12 +205,12 @@ mutations and associated mutation signatures.
 Installation}\label{availability-and-installation}
 
 The development version of \texttt{MutSigTools} package is available at
-\url{https://github.com/sde/MutSigTools} and can be installed as
+\url{https://github.com/sjdlabgroup/MutSigTools} and can be installed as
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# install.packages("devtools")}
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"sde/MutSigTools"}\NormalTok{,}\DataTypeTok{build_vignettes =} \OtherTok{TRUE}\NormalTok{ )}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"sjdlabgroup/MutSigTools"}\NormalTok{,}\DataTypeTok{build_vignettes =} \OtherTok{TRUE}\NormalTok{ )}
 \end{Highlighting}
 \end{Shaded}
 

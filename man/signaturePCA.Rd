@@ -7,7 +7,7 @@
 signaturePCA(sigmat, pngfile=..., )
 }
 \arguments{
-\item{sigmat}{An object of class \emph{mutsig} describing the existing set of signatures.}
+\item{sigmat}{An object of class \emph{mutsig} describing a set of signatures.}
 
 \item{pngfile}{name of \emph{png} formatted image file to be created}
 }
@@ -20,7 +20,7 @@ Create three PCA plots with the following extensions to show difference among mu
  }
 }
 \description{
-Constructs three PCA plots showing variations among the signatures in terms of the weights of their components for different mutation signatures, as well as the eigenvalues and cosine similarity among expected and actual signatures.
+Constructs three PCA plots showing variations among the signatures in terms of the weights of the principal components for different mutation signatures, as well as the eigenvalues and cosine similarity among expected and actual signatures.
 }
 \examples{
 sigmat=signatures.cosmic

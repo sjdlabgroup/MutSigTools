@@ -1,46 +1,28 @@
 
 
 ---
-title: 'Package ''MutSigTools'''
-author: "Vinod Singh, Neil Coleman and Subhajyoti De"
-date: "`r Sys.Date()`"
-output: 
+output:
+  md_document:
+    variant: markdown_github
   pdf_document:
-    citation_package: natbib
-    keep_tex: true
-    latex_engine: pdflatex
-linkcolor: blue
-
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
-  
-header-includes:
-- \usepackage{setspace}\singlespacing
-- \usepackage{float}
-
-
-
+    highlight: default
+    
 bibliography: bibliography.bib
 
-abstract:  "| . \n| **Title**: MutSigTools \n| **Type**: Package \n| **Version**: 1.0.0 \n| **Description**:
-  MutSigTools implements a wide range of generic utilities for processing and analysis of mutation signatures.
-  \n| **Author**: Vinod Singh, Neil Coleman and Subhajyoti De  \n| **Maintainer**:
-  The package maintainer <vs580@scarletmail.rutgers.edu> \n| **License**: GPL-2 \n| **Encoding**: UTF-8\n| **LazyData**: true\n|
-  **Depends**: R (>= 3.4.0), bedr, gplots, factoextra, data.table, tools, stats, GenomicRanges,
-  Biostrings, deconstructSigs. \n| **RoxygenNote**: 6.1.1 \n| **Suggests**:devtools,
-  knitr, rmarkdown.  \n| **VignetteBuilder**: knitr.  \n| **URL**: https://github.com/sde/MutSigTools
-  \n| **BugReports**: https://github.com/sde/MutSigTools/issues "
 ---
 
-\newpage
-\tableofcontents
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(collapse = TRUE,comment = "#>")
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-",
+  results = "hide"
+)
 ```
+
+
 
 ## 1. Introduction:
 The patterns of mutation accumulation in tumor genomes provide insights into past exposure to mutagens, mechanism of DNA damage, repair defects, and extent of genomic instability during development, aging, and cancer. A number of mutation signatures were initially identified using non-negative matrix-factorization-based approaches in analyzing cancer genomic data, providing insights into etiology of the malignant diseases @alexandrov2013signatures. Subsequently additional mutation signatures have been identified using experimental and computational approaches @liu2017mutational. MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.

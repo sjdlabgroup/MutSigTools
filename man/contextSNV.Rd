@@ -15,7 +15,7 @@ contextSNV(snv, file = "empty", mode = "include")
 \emph{exclude}: will give mutations outside the given context.}
 }
 \value{
-\emph{snv} dataframe with column names of \emph{sample, chr, pos, ref, alt, freq}. Where, sample name will be concatenated by the its genomic context. Example: if a mutation within a sample of name \emph{sample1}, lies in the context segment of label \emph{C1} given in the input \emph{bed file} , the sample name of mutation is modified to \emph{sample1_C1}. The mutations that don't lie in any context segment of the \emph(BED) file are discarded.
+\emph{snv} dataframe with column names of \emph{sample, chr, pos, ref, alt, freq}. Where, sample name will be concatenated by the its genomic context. Example: if a mutation within a sample of name \emph{sample1}, lies in the context segment of label \emph{C1} given in the input \emph{bed file} , the sample name of mutation is modified to \emph{sample1_C1}. The mutations that don't lie in any context segment given in the \emph{BED} file are discarded.
 }
 \description{
 Group mutations according to their occurrence within or outside user-annotated genomic segments.

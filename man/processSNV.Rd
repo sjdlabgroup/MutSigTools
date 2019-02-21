@@ -18,7 +18,7 @@ A data frame of class \emph{contextfreq} containing mutation frequency in user-s
 Estimate frequency of point mutations in user-specified nucleotide motif contexts (e.g. trincleotide motifs) for one or more input samples.
 }
 \details{
-Estimation of mutation frequency in pre-determined, user-specified nucleotide motif contexts for input samples. The BSgenome object contains the reference genome information, and should be specified for alternative assembly of human genomes or nonhuman reference genomes. The output returns a data frame containing estimated mutation frequencies in the different genomic contexts, as provided in the sigmat object, for each input sample.
+Estimation of mutation frequency in pre-determined, user-specified nucleotide motif contexts for input samples. The BSgenome object contains the reference genome information, and should be specified for alternative assembly of human genomes or nonhuman reference genomes. The output returns a data frame containing estimated mutation frequencies in the different genomic contexts, as provided in the \emph{contextfreq} object, for each input sample.
 }
 \examples{
 load(file = "data/snv_sample.rda")
