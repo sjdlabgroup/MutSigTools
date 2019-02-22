@@ -124,7 +124,7 @@ When the `include` mode is used, group mutations according to their occurrence i
 ### 3.3  processSNV
 
 ####**Description**
-Estimate frequency of point mutations in user-specified nucleotide motif contexts (e.g. trinucleotide motifs) for one or more input samples.
+Estimate frequency of point mutations in tri-nucleotide motif contexts for one or more input samples.
 
 ####**Usage**
 `processSNV(snv, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)`

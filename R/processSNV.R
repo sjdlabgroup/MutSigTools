@@ -1,6 +1,6 @@
-#' @title Estimate mutation frequency in nucleotide motif contexts.
+#' @title Estimate mutation frequency in tri-nucleotide motif contexts.
 #'
-#' @description Estimate frequency of point mutations in user-specified nucleotide motif contexts (e.g. trincleotide motifs) for one or more input samples.
+#' @description Estimate frequency of point mutations in tri-nucleotide motif contexts for one or more input samples.
 #' @usage processSNV(snv, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
 #' 
 #' @param snv A dataframe having \emph{sample, chr, pos, ref, alt and/or freq} as its columns. The \emph{snv} dataframe can be created by the \code{\link{vcfToSNV}} function.

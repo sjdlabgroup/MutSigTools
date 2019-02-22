@@ -103,7 +103,7 @@ When the `include` mode is used, group mutations according to their occurrence i
 
 #### **Description**
 
-Estimate frequency of point mutations in user-specified nucleotide motif contexts (e.g. trinucleotide motifs) for one or more input samples.
+Estimate frequency of point mutations in tri-nucleotide motif contexts for one or more input samples.
 
 #### **Usage**
 
