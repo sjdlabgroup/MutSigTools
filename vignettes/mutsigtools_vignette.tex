@@ -26,7 +26,7 @@
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{unicode=true,
             pdftitle={Package MutSigTools},
-            pdfauthor={Vinod Singh, Neil Coleman and Subhajyoti De},
+            pdfauthor={Vinod Kumar Singh, Neil Coleman and Subhajyoti De},
             colorlinks=true,
             linkcolor=blue,
             citecolor=Blue,
@@ -129,7 +129,7 @@
   \title{Package `MutSigTools'}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Vinod Singh, Neil Coleman and Subhajyoti De}
+    \author{Vinod Kumar Singh, Neil Coleman and Subhajyoti De}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
@@ -151,7 +151,7 @@
 \textbf{Type}: Package\\
 \textbf{Version}: 1.0.0\\
 \textbf{Description}: MutSigTools implements a wide range of generic utilities for processing and analysis of mutation signatures.\\
-\textbf{Author}: Vinod Singh, Neil Coleman and Subhajyoti De\\
+\textbf{Author}: Vinod Kumar Singh, Neil Coleman and Subhajyoti De\\
 \textbf{Maintainer}: The package maintainer
 \href{mailto:vs580@scarletmail.rutgers.edu}{\nolinkurl{vs580@scarletmail.rutgers.edu}}\\
 \textbf{License}: MIT + file LICENSE\\
@@ -191,13 +191,13 @@ data.table, tools, stats, GenomicRanges, Biostrings, deconstructSigs.\\
 
 The patterns of mutation accumulation in tumor genomes provide insights
 into past exposure to mutagens, mechanism of DNA damage, repair defects,
-and extent of genomic instability during development, aging, and cancer.
+and the extent of genomic instability during development, aging, and cancer.
 A number of \sigs{mutation signatures} were initially identified using
 non-negative matrix-factorization-based approaches in analyzing cancer
 genomic data, providing insights into etiology of the malignant diseases
-\citet{alexandrov2013signatures}. Subsequently additional mutation
+\citet{alexandrov2013signatures},\citet{alexandrov2014mutational}. Subsequently additional mutation
 signatures have been identified using experimental and computational
-approaches \citet{liu2017mutational}. MutSigTools implements wide range
+approaches \citet{boot2018depth}. MutSigTools implements wide range
 of utilities for processing, analysis, and interpretation of somatic
 mutations and associated mutation signatures.
 
@@ -308,7 +308,7 @@ user-annotated genomic segments.
 \item
   \protect\hyperlink{snv}{\texttt{snv}}: A dataframe having
   \texttt{sample,\ chr,\ pos,\ ref,\ alt\ and/or\ freq} as its columns.
-  This snv dataframe can be created by
+  This snv dataframe can be created by the
   \protect\hyperlink{vcfToSNV}{vcfToSNV} function of this package.
 \item
   \texttt{file}: Path of the \texttt{BED\ file}, having genomic segments
@@ -427,7 +427,7 @@ return the updated signature set.
   existing set of signatures.
 \item
   \texttt{sigmatrix2}: An object of class \texttt{mutsig} describing the
-  new signature.
+  new signature(s).
 \end{itemize}
 
 \paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-1}
@@ -474,7 +474,7 @@ An object of mutsig class with the deleted signatures.
 \paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-4}
 
 \begin{verbatim}
-> reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signature 2 and 5.
+> reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signatures 2 and 5.
 \end{verbatim}
 
 \subsubsection{3.6 renameSignature}\label{renamesignature}
@@ -525,11 +525,11 @@ An object of \texttt{mutsig} class.
 
 This function creates a new mutational signature by taking a linear
 combination of \texttt{k} other signatures s\textsubscript{11},
-s\textsubscript{12},\ldots{},s\textsubscript{kn} located in a matrix of
+s\textsubscript{12},\ldots{},s\textsubscript{kn} in a matrix of
 mutational signatures. In order to use this function, a weight vector
 w\textsubscript{1}, w\textsubscript{2},\ldots{},w\textsubscript{k} must
 be specified. The new mutational signature is created by multiplying the
-component signature values by the corresponding weights. The formula for
+component signature values by the corresponding weights in the weight vector. The formula for
 the entries of the new signature is
 s\textsubscript{11}w\textsubscript{1}+s\textsubscript{21}w\textsubscript{2}+\ldots{}+s\textsubscript{k1}w\textsubscript{k},
 s\textsubscript{12}w\textsubscript{1}+s\textsubscript{22}w\textsubscript{2}+\ldots{}+s\textsubscript{k2}w\textsubscript{k},\ldots{},s\textsubscript{1n}w\textsubscript{1}+s\textsubscript{2n}w\textsubscript{2}+\ldots{}+s\textsubscript{kn}w\textsubscript{k}.
@@ -632,8 +632,7 @@ different mutation signatures.
 \paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-5}
 
 Create a heatmap to show relative weights of trinucleotide motifs for
-different mutation signatures in a signature-set. It is possible to use
-alternative motifs such as penta-nucleotide motifs etc.
+different mutation signatures in a signature-set. 
 
 \paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-6}
 
@@ -910,7 +909,7 @@ case sample relative to that in the panel of control samples.
 
 \paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-11}
 
-Identify signatures with significantly higher mutation burden in case
+Identifies signatures with significantly higher mutation burden in case
 samples over control samples.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-13}

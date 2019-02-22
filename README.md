@@ -2,7 +2,7 @@
 1. Introduction:
 ----------------
 
-The patterns of mutation accumulation in tumor genomes provide insights into past exposure to mutagens, mechanism of DNA damage, repair defects, and extent of genomic instability during development, aging, and cancer. A number of mutation signatures were initially identified using non-negative matrix-factorization-based approaches in analyzing cancer genomic data, providing insights into etiology of the malignant diseases Alexandrov et al. (2013). Subsequently additional mutation signatures have been identified using experimental and computational approaches Liu et al. (2017). MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
+The patterns of mutation accumulation in tumor genomes provide insights into past exposure to mutagens, mechanism of DNA damage, repair defects, and the extent of genomic instability during development, aging, and cancer. A number of mutation signatures were initially identified using non-negative matrix-factorization-based approaches in analyzing cancer genomic data, providing insights into etiology of the malignant diseases Alexandrov et al. (2013). Subsequently additional mutation signatures have been identified using experimental and computational approaches Liu et al. (2017). MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
 
 2. Availability and Installation
 --------------------------------
@@ -73,7 +73,7 @@ Group mutations according to their occurrence within or outside user-annotated g
 
 #### **Arguments **
 
--   [`snv`](#snv): A dataframe having `sample, chr, pos, ref, alt and/or freq` as its columns. This snv dataframe can be created by [vcfToSNV](#vcfToSNV) function of this package.
+-   [`snv`](#snv): A dataframe having `sample, chr, pos, ref, alt and/or freq` as its columns. This snv dataframe can be created by the [vcfToSNV](#vcfToSNV) function of this package.
 -   `file`: Path of the `BED file`, having genomic segments and their context information.
 -   `mode`: Default: `include`: Select mutations lying inside the given genomic contexts (obtained from BED file). `exclude`: will give mutations outside the given context.
 
@@ -143,7 +143,7 @@ Add new signature(s) to an existing set of mutation signatures, and return the u
 #### **Arguments **
 
 -   `sigmatrix1`: An object of class `mutsig` describing the existing set of signatures.
--   `sigmatrix2`: An object of class `mutsig` describing the new signature.
+-   `sigmatrix2`: An object of class `mutsig` describing the new signature(s).
 
 #### **Value**
 
@@ -207,13 +207,13 @@ An object of `mutsig` class.
 #### **Examples**
 
     > renamedSigMatrix=renameSignature(sigmatrix=signatures.cosmic, selectSig=sig=c(2,5), 
-    > renameSig=resig=c('two', 'five')) # rename signature 2 and 5.
+    > renameSig=resig=c('two', 'five')) # rename signatures 2 and 5.
 
 ### 3.7 mergeSignature
 
 ##### **Description**
 
-This function creates a new mutational signature by taking a linear combination of `k` other signatures s<sub>11</sub>, s<sub>12</sub>,...,s<sub>kn</sub> located in a matrix of mutational signatures. In order to use this function, a weight vector w<sub>1</sub>, w<sub>2</sub>,...,w<sub>k</sub> must be specified. The new mutational signature is created by multiplying the component signature values by the corresponding weights. The formula for the entries of the new signature is s<sub>11</sub>w<sub>1</sub>+s<sub>21</sub>w<sub>2</sub>+...+s<sub>k1</sub>w<sub>k</sub>, s<sub>12</sub>w<sub>1</sub>+s<sub>22</sub>w<sub>2</sub>+...+s<sub>k2</sub>w<sub>k</sub>,...,s<sub>1n</sub>w<sub>1</sub>+s<sub>2n</sub>w<sub>2</sub>+...+s<sub>kn</sub>w<sub>k</sub>. The function returns this new signature plus all of the signatures in the original dataset that were not merged into the new matrix of signatures.
+This function creates a new mutational signature by taking a linear combination of `k` other signatures s<sub>11</sub>, s<sub>12</sub>,...,s<sub>kn</sub> in a matrix of mutational signatures. In order to use this function, a weight vector w<sub>1</sub>, w<sub>2</sub>,...,w<sub>k</sub> must be specified. The new mutational signature is created by multiplying the component signature values by the corresponding weights in the weight vector. The formula for the entries of the new signature is s<sub>11</sub>w<sub>1</sub>+s<sub>21</sub>w<sub>2</sub>+...+s<sub>k1</sub>w<sub>k</sub>, s<sub>12</sub>w<sub>1</sub>+s<sub>22</sub>w<sub>2</sub>+...+s<sub>k2</sub>w<sub>k</sub>,...,s<sub>1n</sub>w<sub>1</sub>+s<sub>2n</sub>w<sub>2</sub>+...+s<sub>kn</sub>w<sub>k</sub>. The function returns this new signature plus all of the signatures in the original dataset that were not merged into the new matrix of signatures.
 
 #### **Usage**
 
@@ -274,7 +274,7 @@ Construct a heatmap showing relative weights of tri-nucleotide motif for differe
 
 #### **Details**
 
-Create a heatmap to show relative weights of trinucleotide motifs for different mutation signatures in a signature-set. It is possible to use alternative motifs such as penta-nucleotide motifs etc.
+Create a heatmap to show relative weights of trinucleotide motifs for different mutation signatures in a signature-set.
 
 #### **Value**
 
@@ -425,7 +425,7 @@ Determine over-represented mutation signatures in individual case sample(s), hig
 
 #### **Description**
 
-Identify signatures with significantly higher mutation burden in case samples over control samples.
+Identifies signatures with significantly higher mutation burden in case samples over control samples.
 
 #### **Usage**
 
