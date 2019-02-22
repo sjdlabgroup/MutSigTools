@@ -2,7 +2,7 @@
 1. Introduction:
 ----------------
 
-The patterns of mutation accumulation in tumor genomes provide insights into past exposure to mutagens, mechanism of DNA damage, repair defects, and the extent of genomic instability during development, aging, and cancer. A number of mutation signatures were initially identified using non-negative matrix-factorization-based approaches in analyzing cancer genomic data, providing insights into etiology of the malignant diseases Alexandrov et al. (2013). Subsequently additional mutation signatures have been identified using experimental and computational approaches Liu et al. (2017). MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
+The patterns of mutation accumulation in tumor genomes provide insights into past exposure to mutagens, mechanism of DNA damage, repair defects, and the extent of genomic instability during development, aging, and cancer. A number of mutation signatures were initially identified using non-negative matrix-factorization-based approaches in analyzing cancer genomic data, providing insights into etiology of the malignant diseases Alexandrov et al. (2013), Alexandrov and Stratton (2014). Subsequently additional mutation signatures have been identified using experimental and computational approaches Boot et al. (2018) MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
 
 2. Availability and Installation
 --------------------------------
@@ -462,6 +462,8 @@ An object providing the following information:
     contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, 
     threshold=0.05, adjust="fdr")
 
+Alexandrov, Ludmil B, and Michael R Stratton. 2014. “Mutational Signatures: The Patterns of Somatic Mutations Hidden in Cancer Genomes.” *Current Opinion in Genetics & Development* 24. Elsevier: 52–60.
+
 Alexandrov, Ludmil B, Serena Nik-Zainal, David C Wedge, Samuel AJR Aparicio, Sam Behjati, Andrew V Biankin, Graham R Bignell, et al. 2013. “Signatures of Mutational Processes in Human Cancer.” *Nature* 500 (7463). Nature Publishing Group: 415.
 
-Liu, David, Philip Abbosh, Daniel Keliher, Brendan Reardon, Diana Miao, Kent Mouw, Amaro Weiner-Taylor, et al. 2017. “Mutational Patterns in Chemotherapy Resistant Muscle-Invasive Bladder Cancer.” *Nature Communications* 8 (1). Nature Publishing Group: 2193.
+Boot, Arnoud, Mi Ni Huang, Alvin WT Ng, Szu-Chi Ho, Jing Quan Lim, Yoshiiku Kawakami, Kazuaki Chayama, Bin Tean Teh, Hidewaki Nakagawa, and Steven G Rozen. 2018. “In-Depth Characterization of the Cisplatin Mutational Signature in Human Cell Lines and in Esophageal and Liver Tumors.” *Genome Research* 28 (5). Cold Spring Harbor Lab: 654–65.

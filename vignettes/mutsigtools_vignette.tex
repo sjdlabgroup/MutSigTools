@@ -26,7 +26,7 @@
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{unicode=true,
             pdftitle={Package MutSigTools},
-            pdfauthor={Vinod Kumar Singh, Neil Coleman and Subhajyoti De},
+            pdfauthor={Vinod Singh, Neil Coleman and Subhajyoti De},
             colorlinks=true,
             linkcolor=blue,
             citecolor=Blue,
@@ -76,12 +76,6 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{#1}
 \usepackage{graphicx,grffile}
-
-\usepackage{makeidx}
-\makeindex
-
-
-
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -129,32 +123,29 @@
   \title{Package `MutSigTools'}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Vinod Kumar Singh, Neil Coleman and Subhajyoti De}
+    \author{Vinod Singh, Neil Coleman and Subhajyoti De}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-02-20}
+    \date{2019-02-22}
 
 \usepackage{setspace}\singlespacing
 \usepackage{float}
 
 \begin{document}
 \maketitle
-
-\renewcommand{\abstract}{}
-
 \begin{abstract}
-\doublespacing
-\noindent
+.\\
 \textbf{Title}: MutSigTools\\
 \textbf{Type}: Package\\
 \textbf{Version}: 1.0.0\\
-\textbf{Description}: MutSigTools implements a wide range of generic utilities for processing and analysis of mutation signatures.\\
+\textbf{Description}: MutSigTools implements a wide range of generic
+utilities for processing and analysis of mutation signatures.\\
 \textbf{Author}: Vinod Kumar Singh, Neil Coleman and Subhajyoti De\\
 \textbf{Maintainer}: The package maintainer
 \href{mailto:vs580@scarletmail.rutgers.edu}{\nolinkurl{vs580@scarletmail.rutgers.edu}}\\
-\textbf{License}: MIT + file LICENSE\\
+\textbf{License}: GPL-2\\
 \textbf{Encoding}: UTF-8\\
 \textbf{LazyData}: true\\
 \textbf{Depends}: R (\textgreater{}= 3.4.0), bedr, gplots, factoextra,
@@ -162,44 +153,28 @@ data.table, tools, stats, GenomicRanges, Biostrings, deconstructSigs.\\
 \textbf{RoxygenNote}: 6.1.1\\
 \textbf{Suggests}:devtools, knitr, rmarkdown.\\
 \textbf{VignetteBuilder}: knitr.\\
-\textbf{URL}: \url{https://github.com/sjdlabgroup/MutSigTools}\\
-\textbf{BugReports}: \url{https://github.com/sjdlabgroup/MutSigTools/issues}
+\textbf{URL}: \url{https://github.com/sde/MutSigTools}\\
+\textbf{BugReports}: \url{https://github.com/sde/MutSigTools/issues}
 \end{abstract}
 
 \newpage
 
-\singlespacing
-\renewcommand{\contentsname}{R topics documented:}
 \tableofcontents
-
-\DeclareRobustCommand{\BSgenome_head}[1]{\texttt{#1}\index{BSgenome!#1}}
-\DeclareRobustCommand{\sigs}[1]{\texttt{#1}\index{Signatures!#1}}
-\DeclareRobustCommand{\dfs}[1]{\texttt{#1}\index{Dataframes!#1}}
-\DeclareRobustCommand{\sigPCA}[1]{\texttt{#1}\index{Variation among Signatures!#1}}
-
-
-
-
-
-
-
-
-
-
 
 \subsection{1. Introduction:}\label{introduction}
 
 The patterns of mutation accumulation in tumor genomes provide insights
 into past exposure to mutagens, mechanism of DNA damage, repair defects,
-and the extent of genomic instability during development, aging, and cancer.
-A number of \sigs{mutation signatures} were initially identified using
+and the extent of genomic instability during development, aging, and
+cancer. A number of mutation signatures were initially identified using
 non-negative matrix-factorization-based approaches in analyzing cancer
 genomic data, providing insights into etiology of the malignant diseases
-\citet{alexandrov2013signatures},\citet{alexandrov2014mutational}. Subsequently additional mutation
-signatures have been identified using experimental and computational
-approaches \citet{boot2018depth}. MutSigTools implements wide range
-of utilities for processing, analysis, and interpretation of somatic
-mutations and associated mutation signatures.
+\citet{alexandrov2013signatures}, \citet{alexandrov2014mutational}.
+Subsequently additional mutation signatures have been identified using
+experimental and computational approaches \citet{boot2018depth}
+MutSigTools implements wide range of utilities for processing, analysis,
+and interpretation of somatic mutations and associated mutation
+signatures.
 
 \subsection{2. Availability and
 Installation}\label{availability-and-installation}
@@ -221,7 +196,7 @@ The development version of \texttt{MutSigTools} package is available at
 \paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description}
 
 Reads a \texttt{vcf} formatted file to catalog mutations in a data frame
-of class \dfs{snv} for downstream analysis. A snv dataframe consists of
+of class snv for downstream analysis. A snv dataframe consists of
 \texttt{sample,\ chr,\ pos,\ ref,\ alt\ and/or\ freq} columns.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage}
@@ -377,8 +352,8 @@ contexts (e.g.~trinucleotide motifs) for one or more input samples.
   can be created by \protect\hyperlink{vcfToSNV}{\texttt{vcfToSNV}}
   function.
 \item
-  \texttt{bsg}: An boject of class \BSgenome_head{BSGenome}. \texttt{Default:}
-  \href{https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html}{\BSgenome_head{BSgenome.Hsapiens.UCSC.hg19::Hsapiens}}
+  \texttt{bsg}: An boject of class BSGenome. \texttt{Default:}
+  \href{https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html}{BSgenome.Hsapiens.UCSC.hg19::Hsapiens}
 \end{itemize}
 
 \paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-2}
@@ -388,8 +363,8 @@ nucleotide motif contexts for input samples. The BSgenome object
 contains the reference genome information, and should be specified for
 alternative assembly of human genomes or nonhuman reference genomes. The
 output returns a data frame containing estimated mutation frequencies in
-the different genomic contexts, as provided in the \dfs{\texttt{contextfreq}} object, for
-each input sample.
+the different genomic contexts, as provided in the \texttt{contextfreq}
+object for each input sample.
 
 \hypertarget{contextfreq}{\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{contextfreq}}
 
@@ -415,7 +390,7 @@ return the updated signature set.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-3}
 
-\texttt{addSignature(\dfs{sigmatrix}1,\ sigmatrix2)}
+\texttt{addSignature(sigmatrix1,\ sigmatrix2)}
 
 \paragraph{\texorpdfstring{\textbf{Arguments
 }}{Arguments }}\label{mutsig}
@@ -474,7 +449,7 @@ An object of mutsig class with the deleted signatures.
 \paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-4}
 
 \begin{verbatim}
-> reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signatures 2 and 5.
+> reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signature 2 and 5.
 \end{verbatim}
 
 \subsubsection{3.6 renameSignature}\label{renamesignature}
@@ -516,7 +491,7 @@ An object of \texttt{mutsig} class.
 
 \begin{verbatim}
 > renamedSigMatrix=renameSignature(sigmatrix=signatures.cosmic, selectSig=sig=c(2,5), 
-> renameSig=resig=c('two', 'five')) # rename signature 2 and 5.
+> renameSig=resig=c('two', 'five')) # rename signatures 2 and 5.
 \end{verbatim}
 
 \subsubsection{3.7 mergeSignature}\label{mergesignature}
@@ -529,8 +504,8 @@ s\textsubscript{12},\ldots{},s\textsubscript{kn} in a matrix of
 mutational signatures. In order to use this function, a weight vector
 w\textsubscript{1}, w\textsubscript{2},\ldots{},w\textsubscript{k} must
 be specified. The new mutational signature is created by multiplying the
-component signature values by the corresponding weights in the weight vector. The formula for
-the entries of the new signature is
+component signature values by the corresponding weights in the weight
+vector. The formula for the entries of the new signature is
 s\textsubscript{11}w\textsubscript{1}+s\textsubscript{21}w\textsubscript{2}+\ldots{}+s\textsubscript{k1}w\textsubscript{k},
 s\textsubscript{12}w\textsubscript{1}+s\textsubscript{22}w\textsubscript{2}+\ldots{}+s\textsubscript{k2}w\textsubscript{k},\ldots{},s\textsubscript{1n}w\textsubscript{1}+s\textsubscript{2n}w\textsubscript{2}+\ldots{}+s\textsubscript{kn}w\textsubscript{k}.
 The function returns this new signature plus all of the signatures in
@@ -577,7 +552,7 @@ merging signatures 1-6).
 
 \subsubsection{3.8 clusterSignature}\label{clustersignature}
 
-Performs a \sigPCA{hierarchical clustering} analysis of an input mutational
+Performs a hierarchical clustering analysis of an input mutational
 signature matrix using the Euclidean distance metric.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-7}
@@ -609,7 +584,7 @@ mutational signatures in the input matrix are related to one another.
 
 \paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-7}
 
-Construct a \sigPCA{heatmap} showing relative weights of tri-nucleotide motif for
+Construct a heatmap showing relative weights of tri-nucleotide motif for
 different mutation signatures.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-8}
@@ -632,7 +607,7 @@ different mutation signatures.
 \paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-5}
 
 Create a heatmap to show relative weights of trinucleotide motifs for
-different mutation signatures in a signature-set. 
+different mutation signatures in a signature-set.
 
 \paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-6}
 
@@ -656,7 +631,7 @@ expected and actual signatures.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-9}
 
-\texttt{\sigPCA{signaturePCA}(sigmat,\ pngfile=...,\ )}
+\texttt{signaturePCA(sigmat,\ pngfile=...,\ )}
 
 \paragraph{\texorpdfstring{\textbf{Arguments
 }}{Arguments }}\label{arguments-8}
@@ -709,7 +684,7 @@ mutation signatures in the catalog of mutations from a set of samples.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-10}
 
-\texttt{confidenceSig(contextfreq.sample,\ subsample=0.8,\ iter=1000\ ,\ signatures.ref=\sigs{signatures.cosmic},\ lbound=0.1,\ ubound=0.9)}
+\texttt{confidenceSig(contextfreq.sample,\ subsample=0.8,\ iter=1000\ ,\ signatures.ref=signatures.cosmic,\ lbound=0.1,\ ubound=0.9)}
 
 \paragraph{\texorpdfstring{\textbf{Arguments
 }}{Arguments }}\label{arguments-9}
@@ -988,5 +963,5 @@ threshold=0.05, adjust="fdr")
 
 \bibliography{bibliography.bib}
 
-\printindex
+
 \end{document}

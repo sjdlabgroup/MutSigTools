@@ -8,7 +8,6 @@ output:
     highlight: default
     
 bibliography: bibliography.bib
-csl: biomed-central.csl
 
 ---
 
