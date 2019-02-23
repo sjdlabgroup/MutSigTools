@@ -31,8 +31,8 @@ abstract:  "| . \n| **Title**: MutSigTools \n| **Type**: Package \n| **Version**
   The package maintainer <vs580@scarletmail.rutgers.edu> \n| **License**: GPL-2 \n| **Encoding**: UTF-8\n| **LazyData**: true\n|
   **Depends**: R (>= 3.4.0), bedr, gplots, factoextra, data.table, tools, stats, GenomicRanges,
   Biostrings, deconstructSigs. \n| **RoxygenNote**: 6.1.1 \n| **Suggests**:devtools,
-  knitr, rmarkdown.  \n| **VignetteBuilder**: knitr.  \n| **URL**: https://github.com/sde/MutSigTools
-  \n| **BugReports**: https://github.com/sde/MutSigTools/issues "
+  knitr, rmarkdown.  \n| **VignetteBuilder**: knitr.  \n| **URL**: https://github.com/sjdlabgroup/MutSigTools
+  \n| **BugReports**: https://github.com/sjdlabgroup/MutSigTools/issues "
 ---
 
 \newpage
