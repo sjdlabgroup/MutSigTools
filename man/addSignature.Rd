@@ -4,7 +4,7 @@
 \alias{addSignature}
 \title{Add new signature(s) to an existing set of mutation signatures}
 \usage{
-addSignature(sigmatrix1, sigmatrix2)
+addSignature(sigmatrix2, sigmatrix1)
 }
 \arguments{
 \item{sigmatrix2}{An object of class \emph{mutsig} describing the new signature.}
@@ -21,7 +21,8 @@ Add new signature(s) to an existing set of mutation signatures, and  return the 
 Addition of one or more new mutation signature(s) to an existing set of mutation signatures upon which the updated signature set is returned.
 }
 \examples{
-addSignature(sigmatrix2, sigmatrix1)
+newSigMatrix=addSignature(sigmatrix2=signatures.cosmic[c('Signature.10','Signature.11'),], 
+sigmatrix1=signatures.cosmic[c('Signature.1','Signature.2'),])
 }
 \seealso{
 \code{\link{deleteSignature}}, \code{\link{renameSignature}} and \code{\link{mergeSignature}}.

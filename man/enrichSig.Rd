@@ -32,9 +32,10 @@ Determine over-represented mutation signatures in individual case sample(s) rela
 Determine over-represented mutation signatures in individual case sample(s), highlighting those that are significantly enriched. The extent of enrichment is indicated using a percentile score, with low scores indicating high enrichment for specific mutation signatures in a case sample relative to that in the panel of control samples.
 }
 \examples{
-load(file = "data/contextfreq.cases_test.rda")  # load case data
-load(file = "data/contextfreq.controls_test.rda") # load control data
-enrich_obj=enrichSig(contextfreq.case=contextfreq.sample_testcontextfreq.controls_test, contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, threshold=0.05)
+data(contextfreq.cases_test)  # load case data
+data(contextfreq.controls_test) # load control data
+enrich_obj=enrichSig(contextfreq.case=contextfreq.cases_test, contextfreq.controls=contextfreq.controls_test, 
+signatures.ref=signatures.cosmic, threshold=0.05)
 }
 \seealso{
 \itemize{

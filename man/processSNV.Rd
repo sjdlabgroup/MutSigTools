@@ -2,7 +2,7 @@
 % Please edit documentation in R/processSNV.R
 \name{processSNV}
 \alias{processSNV}
-\title{Estimate mutation frequency in nucleotide motif contexts.}
+\title{Estimate mutation frequency in tri-nucleotide motif contexts.}
 \usage{
 processSNV(snv, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
 }
@@ -15,13 +15,13 @@ processSNV(snv, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
 A data frame of class \emph{contextfreq} containing mutation frequency in user-specified nucleotide contexts.
 }
 \description{
-Estimate frequency of point mutations in user-specified nucleotide motif contexts (e.g. trincleotide motifs) for one or more input samples.
+Estimate frequency of point mutations in tri-nucleotide motif contexts for one or more input samples.
 }
 \details{
 Estimation of mutation frequency in pre-determined, user-specified nucleotide motif contexts for input samples. The BSgenome object contains the reference genome information, and should be specified for alternative assembly of human genomes or nonhuman reference genomes. The output returns a data frame containing estimated mutation frequencies in the different genomic contexts, as provided in the \emph{contextfreq} object, for each input sample.
 }
 \examples{
-load(file = "data/snv_sample.rda")
+data(snv_sample)
 context.freq=processSNV(snv=snv_sample, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
 }
 \seealso{

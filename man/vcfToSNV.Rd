@@ -9,7 +9,7 @@ vcfToSNV(vcf, allelefreq = FALSE)
 \arguments{
 \item{vcf}{The path of a standard vcf file.}
 
-\item{allelefreq}{A logical input, TRUE if need mutated allel frequency is required in output object. Default : FALSE}
+\item{allelefreq}{A logical input, TRUE if mutation allele frequency is required in output object. Default : FALSE}
 }
 \value{
 A snv dataframe having datframe with column names as sample, chr, pos, ref, alt, freq. Where, filename will be considered as sample name. \strong{Note}: vcf file name with no extension is the sample name.
@@ -21,11 +21,11 @@ Read vcf formatted file to catalog mutations in a data frame of class snv for do
 Read vcf formatted file to catalog mutations in a data frame of class snv for downstream analysis foreach input sample.
 }
 \examples{
-> vcf_file=system.file("extdata", "test.vcf", package = "MutSigTools", mustWork = TRUE)
+vcf_file=system.file("extdata", "test.vcf", package = "MutSigTools", mustWork = TRUE)
 
-> snv=vcfToSNV(vcf=vcf_file, allelefreq=TRUE)
+snv=vcfToSNV(vcf=vcf_file, allelefreq=TRUE)
 
-> head(snv)
+head(snv)
 
 }
 \seealso{

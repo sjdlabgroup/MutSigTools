@@ -2,7 +2,7 @@
 #'
 #' @description Constructs three PCA plots showing variations among the signatures in terms of the weights of the principal components for different mutation signatures, as well as the eigenvalues and cosine similarity among expected and actual signatures.
 #'
-#' @usage signaturePCA(sigmat, pngfile=..., )
+#' @usage signaturePCA(sigmat, pngfile )
 #' @param sigmat An object of class \emph{mutsig} describing a set of signatures.
 #' @param pngfile name of \emph{png} formatted image file to be created
 #' @keywords mutation signamture PCA
@@ -15,11 +15,11 @@
 #' @export
 #' @examples
 #' sigmat=signatures.cosmic
-#' signaturePCA(sigmat, pngfile="signature")
+#' signaturePCA(sigmat, pngfile="signaturePCA")
 #' 
 #' @seealso \code{\link{signatureHeatmap}}, \code{\link[deconstructSigs]{signatures.cosmic}}, \code{\link{deleteSignature}}, \code{\link{renameSignature}} and \code{\link{mergeSignature}}.
 
-signaturePCA <-function(sigmat, pngfile="signaturePCA") {
+signaturePCA <-function(sigmat, pngfile="signature") {
   sig.pca <- prcomp(sigmat,center = TRUE, scale. = TRUE)
   png(filename=paste0(pngfile,"_PCA.png"), height=600, width=600, res=300)
   fviz_pca_ind(sig.pca,

@@ -21,7 +21,8 @@ Delete selected signatures from an existing set of mutation signatures.
 Deletion of one or more mutation signatures from an existing set of mutation signatures upon which the updated signature set is returned.
 }
 \examples{
-reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signature 2 and 5.
+reducedSigMatrix=deleteSignature(sigmatrix=signatures.cosmic, c(2,5)) # delete signatures 2 and 5.
+
 }
 \seealso{
 \code{\link{addSignature}}, \code{\link{renameSignature}} and \code{\link{mergeSignature}}.

@@ -9,11 +9,11 @@
 #' @details When the \emph{include} mode is used, group mutations according to their occurrence in user-specifiedannotated genomic segments; such segments could represent specific genomic or epigenomic contexts (e.g.actively transcribed coding regions). Alternately, in the \emph{exclude} mode, mutations in undesired regions (e.g.black-listed genomic regions) can be removed.
 #' @export
 #' @examples 
-#' > BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools", mustWork = TRUE)
+#' BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools", mustWork = TRUE)
 #' 
-#' > load(file = "data/snv_sample.rda")   # load 'snv' dataframe object
+#' data(snv_sample.rda)   # load 'snv' dataframe object
 #' 
-#' > context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
+#' context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
 #' 
 #' @seealso \code{\link{vcfToSNV}} to generate \emph{snv} dataframe, and \url{https://genome.ucsc.edu/FAQ/FAQformat.html} for BED file format.
 #' 

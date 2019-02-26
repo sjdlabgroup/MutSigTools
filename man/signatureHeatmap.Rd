@@ -4,7 +4,7 @@
 \alias{signatureHeatmap}
 \title{Create a heatmap of motif weights for signatures.}
 \usage{
-signatureHeatmap(sigmat, pngfile=..., )
+signatureHeatmap(sigmat, pngfile )
 }
 \arguments{
 \item{sigmat}{An object of class \emph{mutsig} describing the existing set of signatures.}
@@ -19,7 +19,7 @@ Construct a heatmap showing relative weights of tri-nucleotide motif for differe
 }
 \examples{
 sigmat=signatures.cosmic
-signatureHeatmap(sigmat, pngfile="signature.png", mar=c(6,8)
+signatureHeatmap(sigmat, pngfile='signatures_heatmap')
 }
 \seealso{
 \code{\link{signaturePCA}}, \code{\link{clusterSignature}} , \code{\link{addSignature}} and \code{\link[deconstructSigs]{signatures.cosmic}}

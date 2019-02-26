@@ -20,7 +20,7 @@ A list of samples having mutational signature corresponding to each allele frequ
 Determine the burden of different mutation signatures acrross different allele frequency ranges.
 }
 \examples{
-load(file = "data/snv_sample.rda")   # load 'snv' dataframe object
+data(snv_sample)   # load 'snv' dataframe object
 mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1))  # list of samples having mutational signature for each allele frequency range i.e., in our example (0.0 - 0.1) & (0.4 - 1.0).
 
 }

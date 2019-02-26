@@ -2,11 +2,12 @@
 #'
 #' @description Provides an interval of uncertainty for estimated weights of known mutation signatures in the catalog of mutations from a set of samples.
 #'
-#' @usage confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)
+#' @usage confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 #' 
-#' @param contextfreq.sample A data frame of class \emph{contextfreq} containing mutation frequency in trinucleotide contexts.
+#' @param contextfreq.sample A sample from the dataframe of class \emph{contextfreq} containing mutation frequency in trinucleotide contexts.
 #' @param subsample Proportion of mutations included during each subsampling. Default: \emph{0.8}  (80 percent)
-#' @param iter Number of iterations of subsampling. Default: \emph{1000} 
+#' @param iter Number of iterations of subsampling. Default: \emph{1000}
+#' @param replace should sampling be with replacement? \emph{TRUE or FALSE}
 #' 
 #' @param signatures.ref An object of class \emph{mutsig} comprising the set of signatures. Default: \emph{'signatures.cosmic'} 
 #' @param lbound Lower bound of the interval of uncertainty for estimated weights of the signatures Default: \emph{0.1} (10 percent)
@@ -22,8 +23,10 @@
 #' @export
 #' @details Provides an interval of uncertainty for estimated weights of known mutation signatures in the catalog of mutations from a set of samples. First, based on the catalog of mutations in a sample, weights of the mutation signatures are estimated. Next, mutations are subsampled iteratively without replacement, each time estimating the weights of the mutation signatures. The intervals of uncertainty for weights of each mutation signatures are determined by aggregating observations from a given number of iterations. 
 #' @examples
-#' load(file = "data/contextfreq.sample_test.rda")
-#' robust_sig_object=confidenceSig(contextfreq.sample=contextfreq.sample_test, subsample=0.8, iter=50, signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)
+#' data(contextfreq.sample_test)
+#
+#' robust_sig_object=confidenceSig(contextfreq.sample=contextfreq.sample_test[1,], subsample=0.8, 
+#' iter=50, signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 #' @seealso 
 #' \itemize{ 
 #' \item \code{\link[deconstructSigs]{signatures.cosmic}}, \code{\link{caseControlSig}} to identify signatures with significantly higher mutation burden in case samples over control samples and \code{\link{enrichSig}} for enriched signatures in individual case samples.  
@@ -31,11 +34,11 @@
 #'  }
 
 
-confidenceSig <-function(contextfreq.sample, subsample=0.8, iter=1000, signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9) {
+confidenceSig <-function(contextfreq.sample, subsample=0.8, iter=1000, signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE) {
   mutevents <- rep(colnames(contextfreq.sample), contextfreq.sample[1,])
   permwt=c()
   for(i in 1:iter) {
-    mutsample <- mutevents[sample(1:length(mutevents), round(length(mutevents)*subsample), replace=FALSE)]
+    mutsample <- mutevents[sample(1:length(mutevents), round(length(mutevents)*subsample), replace=replace)]
     table(factor(mutsample, levels=colnames(contextfreq.sample)))
     
     contextfreq.subsample <-data.frame(t(as.numeric(table(factor(mutsample, levels=colnames(contextfreq.sample))))))
@@ -44,7 +47,7 @@ confidenceSig <-function(contextfreq.sample, subsample=0.8, iter=1000, signature
     permwt=rbind(permwt,whichSignatures(contextfreq.subsample,sample.id = i, signatures.ref, contexts.needed = T)$weights)
   }
   mutsig.obj=list()
-  mutsig.obj$observed.weights <- whichSignatures(contextfreq.subsample,sample.id = i, signatures.ref, contexts.needed = T)$weights
+  mutsig.obj$observed.weights <- whichSignatures(contextfreq.subsample, sample.id = i, signatures.ref, contexts.needed = T)$weights
   mutsig.obj$subsampling <- paste0(subsample*100,"%")
   mutsig.obj$iter <- iter
   mutsig.obj$confidence.interval<-paste0("(",ubound,",",lbound,")")

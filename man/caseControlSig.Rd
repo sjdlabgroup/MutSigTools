@@ -35,9 +35,10 @@ Identify signatures with significantly higher mutation burden in case samples ov
 Identifes signatures with significantly higher mutation burden in case samples campared to control samples using the Wilcoxon Rank sum test. This is suitable when the samples are homogeneous within respective groups, and signatures significantly over-represented in cases relative to the controls are of interest.
 }
 \examples{
-load(file = "data/contextfreq.cases_test.rda")
-load(file = "data/contextfreq.controls_test.rda")
-signif_signatures_obj=caseControlSig(contextfreq.cases=contextfreq.cases_test, contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, threshold=0.05, adjust="fdr")
+data(contextfreq.cases_test)
+data(contextfreq.controls_test)
+signif_signatures_obj=caseControlSig(contextfreq.cases=contextfreq.cases_test, 
+contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, threshold=0.05, adjust="fdr")
 }
 \seealso{
 \itemize{ 

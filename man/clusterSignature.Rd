@@ -4,7 +4,7 @@
 \alias{clusterSignature}
 \title{Hierarchical clustering of mutational signature.}
 \usage{
-clusterSignatures(sigmatrix)
+clusterSignature(sigmatrix)
 }
 \arguments{
 \item{sigmatrix}{An input matrix of mutational signatures.}
@@ -17,7 +17,9 @@ Performs a hierarchical clustering analysis of an input mutational signature mat
 }
 \examples{
 hclust_obj=clusterSignature(sigmatrix=signatures.cosmic) 
-\\code{\\link{signaturePCA}} and \\code{\\link{signaturesHeatmap}}
+}
+\seealso{
+\code{\link{signaturePCA}} and \code{\link{signatureHeatmap}}
 }
 \keyword{cluster}
 \keyword{mutation}

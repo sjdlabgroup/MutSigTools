@@ -14,7 +14,7 @@
 #' @export
 #' 
 #' @examples
-#' load(file = "data/snv_sample.rda")
+#' data(snv_sample)
 #' context.freq=processSNV(snv=snv_sample, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
 #' @seealso  \code{\link{vcfToSNV}} to generate \emph{snv} dataframe, \code{\link[BSgenome]{BSgenome}} and  \code{\link[BSgenome.Hsapiens.UCSC.hg19]{BSgenome.Hsapiens.UCSC.hg19}}. 
 

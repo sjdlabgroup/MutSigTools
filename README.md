@@ -30,7 +30,7 @@ Reads a `vcf` formatted file to catalog mutations in a data frame of class snv f
 #### **Arguments **
 
 -   `vcf`: The `path` of a standard `vcf file`.
--   `allelefreq`: A logical input, TRUE if need mutated allel frequency is required in output object. `Default: FALSE`
+-   `allelefreq`: A logical input, TRUE if mutation allele frequency is required in output object. `Default: FALSE`
 
 #### **Details**
 
@@ -88,7 +88,7 @@ When the `include` mode is used, group mutations according to their occurrence i
 #### **Examples**
 
     > BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools", mustWork = TRUE)
-    > load(file = "data/snv_sample.rda")   # load 'snv' dataframe object
+    > data(snv_sample)   # load 'snv' dataframe object
     > context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
     > head(context_snv)
             sample  chr   pos ref alt
@@ -124,7 +124,7 @@ A data frame of class `contextfreq` containing mutation frequency in user-specif
 
 #### **Examples**
 
-    > load(file = "data/snv_sample.rda")
+    > data(snv_sample)
     > context.freq=processSNV(snv=snv_sample, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
     > context.freq[,1:6]   # view first 6 mutation frequency contexts of 96
               A[C>A]A A[C>A]C A[C>A]G A[C>A]T C[C>A]A C[C>A]C
@@ -138,12 +138,12 @@ Add new signature(s) to an existing set of mutation signatures, and return the u
 
 #### **Usage**
 
-`addSignature(sigmatrix1, sigmatrix2)`
+`addSignature(sigmatrix2, sigmatrix1 )`
 
 #### **Arguments **
 
--   `sigmatrix1`: An object of class `mutsig` describing the existing set of signatures.
 -   `sigmatrix2`: An object of class `mutsig` describing the new signature(s).
+-   `sigmatrix1`: An object of class `mutsig` describing the existing set of signatures.
 
 #### **Value**
 
@@ -151,7 +151,7 @@ The list of mutational signatures with the new signature added.
 
 #### **Examples**
 
-    > newSigMatrix=addSignature(sigmatrix2, sigmatrix1)
+    > newSigMatrix=addSignature(sigmatrix2=signatures.cosmic[c('Signature.10','Signature.11'),], sigmatrix1=signatures.cosmic[c('Signature.1','Signature.2'),])
 
 ### 3.5 deleteSignature
 
@@ -235,7 +235,7 @@ A new matrix of signatures consisting of the signatures in the original matrix o
     > mergeSignature(signatures.cosmic,1:27,weights)
     > # another example
     > weights=rep(1/6,6)  
-    > mergeSignatures(signatures.cosmic,1:6,weights)   
+    > mergeSignature(signatures.cosmic,1:6,weights)   
 
 ### 3.8 clusterSignature
 
@@ -265,7 +265,7 @@ Construct a heatmap showing relative weights of tri-nucleotide motif for differe
 
 #### **Usage**
 
-`signatureHeatmap(sigmat, pngfile=..., )`
+`signatureHeatmap(sigmat, pngfile='signatures_heatmap' )`
 
 #### **Arguments **
 
@@ -283,7 +283,7 @@ A png formatted image file.
 #### **Examples**
 
     > sigmat=signatures.cosmic
-    > signatureHeatmap(sigmat, pngfile="signature", mar=c(6,8)
+    > signatureHeatmap(sigmat, pngfile='signatures_heatmap')
 
 ### 3.10 signaturePCA
 
@@ -293,7 +293,7 @@ Constructs three PCA plots showing variations among the signatures in terms of t
 
 #### **Usage**
 
-`signaturePCA(sigmat, pngfile=..., )`
+`signaturePCA(sigmat, pngfile )`
 
 #### **Arguments **
 
@@ -311,7 +311,7 @@ Create three `PCA plots` with the following extensions to show difference among 
 #### **Examples**
 
     > sigmat=signatures.cosmic
-    > signaturePCA(sigmat, pngfile="signature")
+    > signaturePCA(sigmat, pngfile="signaturePCA")
 
 ### 3.11 confidenceSig
 
@@ -321,16 +321,17 @@ Provides an interval of uncertainty for estimated weights of known mutation sign
 
 #### **Usage**
 
-`confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)`
+`confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)`
 
 #### **Arguments **
 
--   `contextfreq.sample`: A data frame of class [`contextfreq`](#contextfreq) containing mutation frequency in trinucleotide contexts.
+-   `contextfreq.sample`: A sample from the dataframe of class [`contextfreq`](#contextfreq) containing mutation frequency in trinucleotide contexts.
 -   `subsample`: Proportion of mutations included during each subsampling. `Default: 0.8` (80 percent)
 -   `iter`: Number of iterations of subsampling. `Default: 1000`
 -   `signatures.ref`: An object of class mutsig comprising the set of signatures. Default: [signatures.cosmic](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
 -   `lbound`: Lower bound of the interval of uncertainty for estimated weights of the signatures. `Default: 0.1` (10 percent)
 -   `ubound`: Upper bound of the interval of uncertainty for estimated weights of the signatures. `Default: 0.9` (90 percent)
+-   `replace`: should sampling be with replacement? `TRUE` or `FALSE`
 
 #### **Details**
 
@@ -347,9 +348,9 @@ An object containing the following information:
 
 #### **Examples**
 
-    > load(file = "data/contextfreq.sample_test.rda")
+    > data(contextfreq.sample_test)
     > robust_sig_object=confidenceSig(contextfreq.sample=contextfreq.sample_test, subsample=0.8, iter=50, 
-    signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)
+    signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 
 ### 3.12 persistSig
 
@@ -371,7 +372,7 @@ A list of samples having mutational signature corresponding to each allele frequ
 
 #### **Examples**
 
-    > load(file = "data/snv_sample.rda")   # load 'snv' dataframe object
+    > data(snv_sample)   # load 'snv' dataframe object
     > mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1))  # list of samples having mutational signature for each allele frequency range i.e., in this example frequency ranges are (0.0 - 0.1) & (0.4 - 1.0).
 
     > mut_sig_per_freq_range$CRF004556[,1:6] # view some signatures at different allele freq ranges
@@ -417,9 +418,9 @@ Determine over-represented mutation signatures in individual case sample(s), hig
 
 #### **Examples**
 
-    > load(file = "data/contextfreq.cases_test.rda")
-    > load(file = "data/contextfreq.controls_test.rda")
-    > enrich_obj=enrichSig(contextfreq.case=contextfreq.sample_test, contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, threshold=0.05)
+    > data(contextfreq.cases_test)
+    > data(contextfreq.controls_test)
+    > enrich_obj=enrichSig(contextfreq.case=contextfreq.cases_test, contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, threshold=0.05)
 
 ### 3.14 caseControlSig
 
@@ -456,8 +457,8 @@ An object providing the following information:
 
 #### **Examples**
 
-    > load(file = "data/contextfreq.cases_test.rda")
-    > load(file = "data/contextfreq.controls_test.rda")
+    > data(contextfreq.cases_test)
+    > data(contextfreq.controls_test)
     > signif_signatures_obj=caseControlSig(contextfreq.cases=contextfreq.cases_test, 
     contextfreq.controls=contextfreq.controls_test, signatures.ref=signatures.cosmic, 
     threshold=0.05, adjust="fdr")

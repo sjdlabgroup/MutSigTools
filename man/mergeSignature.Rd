@@ -4,7 +4,7 @@
 \alias{mergeSignature}
 \title{Creates a new mutational signature by taking a linear combination of other set of signatures.}
 \usage{
-mergeSignature(sigmatrix,sigs,weights)
+mergeSignature(sigmatrix,sig,weights)
 }
 \arguments{
 \item{sigmatrix}{A \emph{mutsig} object of mutational signatures.}
@@ -23,7 +23,7 @@ This function creates a new mutational signature by taking a linear combination 
 weights=rep(1/27,27)      
 mergeSignature(signatures.cosmic,1:27,weights)      
 weights=rep(1/6,6)  
-mergeSignatures(signatures.cosmic,1:6,weights)   
+mergeSignature(signatures.cosmic,1:6,weights)   
 
 }
 \seealso{

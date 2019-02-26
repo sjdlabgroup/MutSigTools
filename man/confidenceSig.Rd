@@ -4,10 +4,10 @@
 \alias{confidenceSig}
 \title{Provides interval of uncertainty for estimated weights of mutation signatures}
 \usage{
-confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)
+confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 }
 \arguments{
-\item{contextfreq.sample}{A data frame of class \emph{contextfreq} containing mutation frequency in trinucleotide contexts.}
+\item{contextfreq.sample}{A sample from the dataframe of class \emph{contextfreq} containing mutation frequency in trinucleotide contexts.}
 
 \item{subsample}{Proportion of mutations included during each subsampling. Default: \emph{0.8}  (80 percent)}
 
@@ -18,6 +18,8 @@ confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=sign
 \item{lbound}{Lower bound of the interval of uncertainty for estimated weights of the signatures Default: \emph{0.1} (10 percent)}
 
 \item{ubound}{Upper bound of the interval of uncertainty for estimated weights of the signatures Default: \emph{0.9} (90 percent)}
+
+\item{replace}{should sampling be with replacement? \emph{TRUE or FALSE}}
 }
 \value{
 An object containing the following information:
@@ -35,8 +37,9 @@ Provides an interval of uncertainty for estimated weights of known mutation sign
 Provides an interval of uncertainty for estimated weights of known mutation signatures in the catalog of mutations from a set of samples. First, based on the catalog of mutations in a sample, weights of the mutation signatures are estimated. Next, mutations are subsampled iteratively without replacement, each time estimating the weights of the mutation signatures. The intervals of uncertainty for weights of each mutation signatures are determined by aggregating observations from a given number of iterations.
 }
 \examples{
-load(file = "data/contextfreq.sample_test.rda")
-robust_sig_object=confidenceSig(contextfreq.sample=contextfreq.sample_test, subsample=0.8, iter=50, signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9)
+data(contextfreq.sample_test)
+robust_sig_object=confidenceSig(contextfreq.sample=contextfreq.sample_test[1,], subsample=0.8, 
+iter=50, signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 }
 \seealso{
 \itemize{ 

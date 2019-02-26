@@ -3,9 +3,8 @@ Type: Package
 Title: Mutational signature analysis
 Version: 1.0.0
 Author: Vinod Singh, Neil Coleman and Subhajyoti De 
-Maintainer: The package maintainer <vs580@scarletmail.rutgers.edu>
-Description: The patterns of mutation accumulation in tumor genomes provide insights into past exposure to mutagens, mechanism of DNA damage, repair defects, and extent of genomic instability during development, aging, and cancer. A number of mutation signatures were initially identified using non-negative matrix-factorization-based approaches in analyzing cancer genomic data, providing insights into etiology of the malignant diseases. Subsequently additional mutation signatures have been identified using experimental and computational approaches. MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
-License: GPL-2
+Maintainer: The MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Depends:
@@ -25,5 +24,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/sde/MutSigTools
-BugReports: https://github.com/sde/MutSigTools/issues
+URL: https://github.com/sjdlabgroup/MutSigTools
+BugReports: https://github.com/sjdlabgroup/MutSigTools/issues

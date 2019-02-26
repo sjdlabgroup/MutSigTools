@@ -4,7 +4,7 @@
 \alias{signaturePCA}
 \title{Create three PCA plots for signatures.}
 \usage{
-signaturePCA(sigmat, pngfile=..., )
+signaturePCA(sigmat, pngfile )
 }
 \arguments{
 \item{sigmat}{An object of class \emph{mutsig} describing a set of signatures.}
@@ -24,7 +24,7 @@ Constructs three PCA plots showing variations among the signatures in terms of t
 }
 \examples{
 sigmat=signatures.cosmic
-signaturePCA(sigmat, pngfile="signature")
+signaturePCA(sigmat, pngfile="signaturePCA")
 
 }
 \seealso{
