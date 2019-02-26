@@ -3,8 +3,9 @@ Type: Package
 Title: Mutational signature analysis
 Version: 1.0.0
 Author: Vinod Singh, Neil Coleman and Subhajyoti De 
-Maintainer: The MutSigTools implements wide range of utilities for processing, analysis, and interpretation of somatic mutations and associated mutation signatures.
-License: MIT
+Maintainer: The package maintainer <vs580@scarletmail.rutgers.edu>
+Description: MutSigTools implements a wide range of generic utilities for processing and analysis of mutation signatures.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
@@ -24,5 +25,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/sjdlabgroup/MutSigTools
-BugReports: https://github.com/sjdlabgroup/MutSigTools/issues
+URL: https://github.com/sde/MutSigTools
+BugReports: https://github.com/sde/MutSigTools/issues

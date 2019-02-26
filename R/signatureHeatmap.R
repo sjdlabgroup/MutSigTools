@@ -8,7 +8,7 @@
 #' @keywords mutation signamture heatmap
 #' @return A \emph{png} formatted image file.  
 #' @export
-#' @details Create a heatmap to show relative weights of trinucleotide motifs for different mutation signatures in a signature-set. It is possible to use alternative motifs such as penta-nucleotide motifs etc.
+#' @details Create a heatmap to show relative weights of trinucleotide motifs for different mutation signatures in a signature-set. 
 #' @examples
 #' sigmat=signatures.cosmic
 #' signatureHeatmap(sigmat, pngfile='signatures_heatmap')

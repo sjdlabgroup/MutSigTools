@@ -17,6 +17,9 @@ A \emph{png} formatted image file.
 \description{
 Construct a heatmap showing relative weights of tri-nucleotide motif for different mutation signatures.
 }
+\details{
+Create a heatmap to show relative weights of trinucleotide motifs for different mutation signatures in a signature-set.
+}
 \examples{
 sigmat=signatures.cosmic
 signatureHeatmap(sigmat, pngfile='signatures_heatmap')
