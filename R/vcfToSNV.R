@@ -21,8 +21,7 @@
 #' 
 vcfToSNV <- function(vcf, allelefreq=FALSE)
 {
-      #vcf='/Users/vinodsingh/OneDrive\ -\ Rutgers\ University/MutSigTool/test_data/CRF004556.vcf'
-      #library(bedr)
+      
       vcf_data=read.vcf(vcf)
 
             info_split=strsplit(x=vcf_data$vcf$INFO,split = ';')

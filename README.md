@@ -11,7 +11,7 @@ The development version of `MutSigTools` package is available at <https://github
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("sjdlabgroup/MutSigTools",build_vignettes = TRUE )
+devtools::install_github("sjdlabgroup/MutSigTools",build_vignettes = FALSE )
 ```
 
 3. Functions
