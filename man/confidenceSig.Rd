@@ -13,7 +13,7 @@ confidenceSig(contextfreq.sample, subsample=0.8, iter=1000 , signatures.ref=sign
 
 \item{iter}{Number of iterations of subsampling. Default: \emph{1000}}
 
-\item{signatures.ref}{An object of class \emph{mutsig} comprising the set of signatures. Default: \emph{'signatures.cosmic'}}
+\item{signatures.ref}{An object of class \emph{mutsig} comprising the set of signatures. \emph{(signatures.nature2013 or signatures.cosmic or signatures.cosmic.2019 )}, Default: \emph{'signatures.cosmic'}}
 
 \item{lbound}{Lower bound of the interval of uncertainty for estimated weights of the signatures Default: \emph{0.1} (10 percent)}
 

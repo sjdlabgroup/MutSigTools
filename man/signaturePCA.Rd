@@ -32,4 +32,4 @@ signaturePCA(sigmat, pngfile="signaturePCA")
 }
 \keyword{PCA}
 \keyword{mutation}
-\keyword{signamture}
+\keyword{signature}

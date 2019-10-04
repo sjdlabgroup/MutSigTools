@@ -11,7 +11,7 @@ enrichSig(contextfreq.cases, contextfreq.controls, signatures.ref=signatures.cos
 
 \item{contextfreq.controls}{A data frame of class \emph{contextfreq} containing mutation frequency in tri-nucleotide contexts in control samples}
 
-\item{signatures.ref}{An object of class mutsig comprising the set of signatures. Default: \emph{'signatures.cosmic'}}
+\item{signatures.ref}{An object of class mutsig comprising the set of signatures. \emph{(signatures.nature2013 or signatures.cosmic or signatures.cosmic.2019 )}, Default: \emph{'signatures.cosmic'}}
 
 \item{threshold}{Threshold for uncorrected percentile score. Default: \emph{0.05}}
 }
@@ -39,7 +39,7 @@ signatures.ref=signatures.cosmic, threshold=0.05)
 }
 \seealso{
 \itemize{
-\item \code{\link[deconstructSigs]{signatures.cosmic}}, \code{\link{confidenceSig}} for robust signatures and \code{\link{caseControlSig}} to identify signatures with significantly higher mutation burden in case samples over control samples.
+\item \code{\link[deconstructSigs]{signatures.cosmic}}, \code{\link{confidenceSig}} for robust signatures and \code{\link{caseControlSig}} to identify signatures with significantly higher mutation burden in case samples over control samples. 
 \item To generate \emph{contextfreq} object from \emph{snv} dataframe use \code{\link{processSNV}} and \code{\link{vcfToSNV}}.
 }
 }

@@ -293,7 +293,7 @@ user-annotated genomic segments.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-1}
 
-\texttt{contextSNV(snv,\ file\ =\ "empty",\ mode\ =\ "include")}
+\texttt{contextSNV(snv,\ file\ =\ "empty",\ mode\ =\ "include", \ bed\_file\_start\_cord \ = \ 0)}
 
 \paragraph{\texorpdfstring{\textbf{Arguments
 }}{Arguments }}\label{arguments-1}
@@ -312,6 +312,9 @@ user-annotated genomic segments.
   \texttt{mode}: Default: \texttt{include}: Select mutations lying
   inside the given genomic contexts (obtained from BED file).
   \texttt{exclude}: will give mutations outside the given context.
+\item
+  \texttt{bed\_file\_start\_cord}: Default: \texttt{0}: If BED file has 0-based coordinate system. \texttt{1}: If BED file has 1-based coordinate system..
+  
 \end{itemize}
 
 \paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-1}
@@ -339,7 +342,7 @@ discarded.
 \begin{verbatim}
 > BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools", mustWork = TRUE)
 > data(snv_sample)   # load 'snv' dataframe object
-> context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
+> context_snv=contextSNV(snv=snv_sample,BED_file, mode='include', bed_file_start_cord=0)
 > head(context_snv)
         sample  chr   pos ref alt
 1 CRF004556_E7 chr1 15118   A   G
@@ -695,12 +698,53 @@ difference among mutational signatures.
 > signaturePCA(sigmat, pngfile=“signaturePCA”)
 \end{verbatim}
 
-\subsubsection{3.11 confidenceSig}\label{confidencesig}
+
+\subsubsection{3.11 signature\_tSNE}\label{signaturetsne}
+
+\paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-8}
+
+Constructs tSNE plot of mutation signatures.
+
+\paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-9}
+
+\texttt{\var{signature\_tSNE}(sigmat,\ pngfile\ )}
+
+\paragraph{\texorpdfstring{\textbf{Arguments
+}}{Arguments }}\label{arguments-8}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sigmat}: An object of class \texttt{mutsig} describing a set
+  of signatures.
+\item
+  \texttt{pngfile}: Name of \texttt{png} formatted image file to be
+  created.
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-7}
+
+Create a \texttt{tSNE\ plots} plot to show similarity among mutational signatures.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{*\_tSNE.png} : The tSNE plot file of the mutation signatures. 
+
+\end{itemize}
+
+\paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-9}
+
+\begin{verbatim}
+> sigmat=signatures.cosmic
+> signature_tSNE(sigmat, pngfile=“signature_tSNE”)
+\end{verbatim}
+
+\subsubsection{3.12 confidenceSig}\label{confidencesig}
 
 \paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-9}
 
-Provides an interval of uncertainty for estimated weights of known
-mutation signatures in the catalog of mutations from a set of samples.
+Provides an interval of uncertainty for estimated weights of known mutation signatures in the catalog of mutations from a set of samples.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-10}
 
@@ -722,9 +766,7 @@ mutation signatures in the catalog of mutations from a set of samples.
   \texttt{iter}: Number of iterations of subsampling.
   \texttt{Default:\ 1000}
 \item
-  \texttt{signatures.ref}: An object of class mutsig comprising the set
-  of signatures. Default:
-  \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic}
+  \texttt{signatures.ref}: An object of class mutsig comprising the set of signatures. (`signatures.nature2013' or `signatures.cosmic' or `signatures.cosmic.2019' ), Default: \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic} 
 \item
   \texttt{lbound}: Lower bound of the interval of uncertainty for
   estimated weights of the signatures. \texttt{Default:\ 0.1} (10
@@ -742,7 +784,7 @@ mutation signatures in the catalog of mutations from a set of samples.
 Provides an interval of uncertainty for estimated weights of known
 mutation signatures in the catalog of mutations from a set of samples.
 First, based on the catalog of mutations in a sample, weights of the
-mutation signatures are estimated. Next, mutations are subsampled
+mutation signatures are estimated. Next, mutations are sub-sampled
 iteratively without replacement, each time estimating the weights of the
 mutation signatures. The intervals of uncertainty for weights of each
 mutation signatures are determined by aggregating observations from a
@@ -779,14 +821,13 @@ An object containing the following information:
 signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 \end{verbatim}
 
-\subsubsection{3.12 persistSig}\label{persistsig}
+\subsubsection{3.13 persistSig}\label{persistsig}
 
-Determine the burden of different mutation signatures acrross different
-allele frequency ranges.
+Determine the burden of different mutation signatures across different allele frequency ranges. The function should be used with caution; Local copy number and purity-corrected variant allele frequencies should be provided in the column 6 of the \protect\hyperlink{snv}{\texttt{snv}} object.
 
 \paragraph{\texorpdfstring{\textbf{Usage}}{Usage}}\label{usage-11}
 
-\texttt{persistSig(snv,\ th\_vec\_lw,\ th\_vec\_up,\ bsg\ =\ NULL)}
+\texttt{persistSig(snv,\ th\_vec\_lw,\ th\_vec\_up,\ bsg\ =\ BSgenome.Hsapiens.UCSC.hg19::Hsapiens)}
 
 \paragraph{\texorpdfstring{\textbf{Arguments
 }}{Arguments }}\label{arguments-10}
@@ -801,18 +842,19 @@ allele frequency ranges.
   \texttt{th\_vec\_lw}: A vector of lower limits of frequency ranges.
 \item
   \texttt{th\_vec\_up}: A vector of upper limits of frequency ranges.
+  \texttt{signatures.ref}: An object of class mutsig comprising the set of signatures. (`signatures.nature2013' or `signatures.cosmic' or `signatures.cosmic.2019' ), Default: \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic} 
 \end{itemize}
 
 \paragraph{\texorpdfstring{\textbf{Value}}{Value}}\label{value-9}
 
-A list of samples having mutational signature corresponding to each
-allele frequency range
+A list of samples having mutational signature corresponding to each allele frequency range
 
 \paragraph{\texorpdfstring{\textbf{Examples}}{Examples}}\label{examples-11}
 
 \begin{verbatim}
 > data(snv_sample)   # load 'snv' dataframe object
-> mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1))  # list of samples having mutational signature for each allele frequency range i.e., in this example frequency ranges are (0.0 - 0.1) & (0.4 - 1.0).
+> mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1), 
+bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)  # list of samples having mutational signature for each allele frequency range i.e., in this example frequency ranges are (0.0 - 0.1) & (0.4 - 1.0).
 
 > mut_sig_per_freq_range$CRF004556[,1:6] # view some signatures at different allele freq ranges
            sig.1 sig.2     sig.3 sig.4      sig.5      sig.6
@@ -820,7 +862,7 @@ allele frequency range
 0.4-1 0.19941897     0 0.2126304     0 0.09984891 0.08473515
 \end{verbatim}
 
-\subsubsection{3.13 enrichSig}\label{enrichsig}
+\subsubsection{3.14 enrichSig}\label{enrichsig}
 
 \paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-10}
 
@@ -847,9 +889,7 @@ the control population.
   \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
   mutation frequency in tri-nucleotide contexts in control samples.
 \item
-  \texttt{signatures.ref}: An object of class mutsig comprising the set
-  of signatures. Default:
-  \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic}
+  \texttt{signatures.ref}: An object of class mutsig comprising the set of signatures. (`signatures.nature2013' or `signatures.cosmic' or `signatures.cosmic.2019' ), Default: \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic} 
 \item
   \texttt{threshold}: Threshold for uncorrected percentile score.
   \texttt{Default:\ 0.05}
@@ -904,7 +944,7 @@ case sample relative to that in the panel of control samples.
 	signatures.ref=signatures.cosmic, threshold=0.05)
 \end{verbatim}
 
-\subsubsection{3.14 caseControlSig}\label{casecontrolsig}
+\subsubsection{3.15 caseControlSig}\label{casecontrolsig}
 
 \paragraph{\texorpdfstring{\textbf{Description}}{Description}}\label{description-11}
 
@@ -929,9 +969,7 @@ samples over control samples.
   \protect\hyperlink{contextfreq}{\texttt{contextfreq}} containing
   mutation frequency in tri-nucleotide contexts in control samples.
 \item
-  \texttt{signatures.ref}: An object of class mutsig comprising the set
-  of signatures. Default:
-  \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic}
+  \texttt{signatures.ref}: An object of class mutsig comprising the set of signatures. (`signatures.nature2013' or `signatures.cosmic' or `signatures.cosmic.2019' ), Default: \href{https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf}{signatures.cosmic} 
 \item
   \texttt{threshold}: Threshold for uncorrected percentile score.
   \texttt{Default:\ 0.05}
@@ -943,8 +981,8 @@ samples over control samples.
 
 \paragraph{\texorpdfstring{\textbf{Details}}{Details}}\label{details-9}
 
-Identifes signatures with significantly higher mutation burden in case
-samples campared to control samples using the
+Identifies signatures with significantly higher mutation burden in case
+samples compared to control samples using the
 \href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/wilcox.test}{Wilcoxon
 Rank sum test}. This is suitable when the samples are homogeneous within
 respective groups, and signatures significantly over-represented in

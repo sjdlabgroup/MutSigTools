@@ -9,7 +9,7 @@
 #' @param iter Number of iterations of subsampling. Default: \emph{1000}
 #' @param replace should sampling be with replacement? \emph{TRUE or FALSE}
 #' 
-#' @param signatures.ref An object of class \emph{mutsig} comprising the set of signatures. Default: \emph{'signatures.cosmic'} 
+#' @param signatures.ref An object of class \emph{mutsig} comprising the set of signatures. \emph{(signatures.nature2013 or signatures.cosmic or signatures.cosmic.2019 )}, Default: \emph{'signatures.cosmic'} 
 #' @param lbound Lower bound of the interval of uncertainty for estimated weights of the signatures Default: \emph{0.1} (10 percent)
 #' @param ubound Upper bound of the interval of uncertainty for estimated weights of the signatures Default: \emph{0.9} (90 percent)
 #' @keywords uncertainty for estimated weights of mutation signatures 

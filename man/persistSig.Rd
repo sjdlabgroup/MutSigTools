@@ -4,7 +4,8 @@
 \alias{persistSig}
 \title{Mutation signatures in different allele frequency spectrum}
 \usage{
-persistSig(snv, th_vec_lw, th_vec_up, bsg = NULL)
+persistSig(snv, th_vec_lw, th_vec_up, signatures.ref = signatures.cosmic,
+  bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)
 }
 \arguments{
 \item{snv}{A dataframe having \emph{sample, chr, pos, ref, alt and/or freq} as it's columns. This dataframe may have more than one sample.}
@@ -12,16 +13,20 @@ persistSig(snv, th_vec_lw, th_vec_up, bsg = NULL)
 \item{th_vec_lw}{A vector of lower limits of frequency ranges.}
 
 \item{th_vec_up}{A vector of upper limits of frequency ranges.}
+
+\item{signatures.ref}{An object of class \emph{mutsig} comprising the set of signatures. \emph{(signatures.nature2013 or signatures.cosmic or signatures.cosmic.2019 )}, \emph{Default: 'signatures.cosmic'}}
+
+\item{bsg}{An object of class \emph{BSGenome}. Default: \emph{BSgenome.Hsapiens.UCSC.hg19}}
 }
 \value{
 A list of samples having mutational signature corresponding to each allele frequency range
 }
 \description{
-Determine the burden of different mutation signatures acrross different allele frequency ranges.
+Determine the burden of different mutation signatures acrross different allele frequency ranges.The function should be used with caution; Local copy number and purity-corrected variant allele frequencies should be provided in the column 6 of the \emph{snv}
 }
 \examples{
 data(snv_sample)   # load 'snv' dataframe object
-mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1))  # list of samples having mutational signature for each allele frequency range i.e., in our example (0.0 - 0.1) & (0.4 - 1.0).
+mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1), signatures.ref = signatures.cosmic,  bsg=BSgenome.Hsapiens.UCSC.hg19::Hsapiens)  # list of samples having mutational signature for each allele frequency range i.e., in our example (0.0 - 0.1) & (0.4 - 1.0).
 
 }
 \seealso{

@@ -9,7 +9,7 @@ vcfToSNV(vcf, allelefreq = FALSE)
 \arguments{
 \item{vcf}{The path of a standard vcf file.}
 
-\item{allelefreq}{A logical input, TRUE if mutation allele frequency is required in output object. Default : FALSE}
+\item{allelefreq}{A logical input, TRUE if mutation or variant allele frequency is required in output object. Default : FALSE}
 }
 \value{
 A snv dataframe having datframe with column names as sample, chr, pos, ref, alt, freq. Where, filename will be considered as sample name. \strong{Note}: vcf file name with no extension is the sample name.

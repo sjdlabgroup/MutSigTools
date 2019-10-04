@@ -1,5 +1,5 @@
 
-bed_to_granges <- function(file){
+bed_to_granges <- function(file, start_cord=0){
   df <- read.table(file, header=F,stringsAsFactors=F)
 
   if(length(df) > 6){
@@ -26,6 +26,14 @@ bed_to_granges <- function(file){
     gr <- with(df, GRanges(chr, IRanges(start, end), id=id, score=score))
   } else if (length(df)==6){
     gr <- with(df, GRanges(chr, IRanges(start, end), id=id, score=score, strand=strand))
+  }
+  
+  if(start_cord==0)
+  {
+    start(gr)=start(gr)+1
+  }else if(start_cord==1)
+  {
+    start(gr)=start(gr)
   }
   return(gr)
 }

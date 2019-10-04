@@ -18,6 +18,7 @@ Depends:
   stats,
   GenomicRanges,
   Biostrings,
+  Rtsne,
   deconstructSigs
 RoxygenNote: 6.1.1
 Suggests:

@@ -6,8 +6,9 @@
 #' 
 #' @param contextfreq.cases A data frame of class \emph{contextfreq} containing mutation frequency in tri-nucleotide contexts in case samples
 #' @param contextfreq.controls A data frame of class \emph{contextfreq} containing mutation frequency in tri-nucleotide contexts in control samples
-#' @param signatures.ref An object of class mutsig comprising the set of signatures. Default: \emph{'signatures.cosmic'} 
+#' @param signatures.ref An object of class mutsig comprising the set of signatures. \emph{(signatures.nature2013 or signatures.cosmic or signatures.cosmic.2019 )}, Default: \emph{'signatures.cosmic'} 
 #' @param threshold Threshold for uncorrected percentile score. Default: \emph{0.05} 
+
  
 #' @keywords enriched signatures  
 #' @return An object of class \emph{enrichSig.obj} providing the following information:
@@ -27,7 +28,7 @@
 #' enrich_obj=enrichSig(contextfreq.case=contextfreq.cases_test, contextfreq.controls=contextfreq.controls_test, 
 #' signatures.ref=signatures.cosmic, threshold=0.05)
 #' @seealso \itemize{
-#' \item \code{\link[deconstructSigs]{signatures.cosmic}}, \code{\link{confidenceSig}} for robust signatures and \code{\link{caseControlSig}} to identify signatures with significantly higher mutation burden in case samples over control samples.
+#' \item \code{\link[deconstructSigs]{signatures.cosmic}}, \code{\link{confidenceSig}} for robust signatures and \code{\link{caseControlSig}} to identify signatures with significantly higher mutation burden in case samples over control samples. 
 #' \item To generate \emph{contextfreq} object from \emph{snv} dataframe use \code{\link{processSNV}} and \code{\link{vcfToSNV}}.
 #' }
 

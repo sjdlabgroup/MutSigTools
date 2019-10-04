@@ -6,7 +6,7 @@
 #' 
 #' @param contextfreq.cases A data frame of class \emph{contextfreq} containing mutation frequency in tri-nucleotide contexts in case samples
 #' @param contextfreq.controls A data frame of class \emph{contextfreq} containing mutation frequency in tri-nucleotide contexts in control samples
-#' @param signatures.ref An object of class \emph{mutsig} comprising the set of signatures. \emph{Default: 'signatures.cosmic'} 
+#' @param signatures.ref An object of class \emph{mutsig} comprising the set of signatures. \emph{(signatures.nature2013 or signatures.cosmic or signatures.cosmic.2019 )}, \emph{Default: 'signatures.cosmic'} 
 #' @param threshold Threshold for uncorrected percentile score. \emph{Default: 0.05}
 #' @param adjust Method for p-value correction for multiple testing. Options are as provided in the function \emph{p.adjust}. The default method is the \emph{"FDR"} method.  
 
@@ -21,7 +21,7 @@
 #'   \item \strong{adjust.p.value:}		  P-values adjusted for multiple testing correction.
 #'   }
 #'   
-#' @details Identifes signatures with significantly higher mutation burden in case samples campared to control samples using the Wilcoxon Rank sum test. This is suitable when the samples are homogeneous within respective groups, and signatures significantly over-represented in cases relative to the controls are of interest.
+#' @details Identifes signatures with significantly higher mutation burden in case samples campared to control samples using the Wilcoxon Rank sum test. This is suitable when the samples are homogeneous within respective groups i.e., case and control, and signatures significantly over-represented in cases relative to the controls are of interest.
 #' @export
 #' @examples
 #' data(contextfreq.cases_test)

@@ -1,38 +1,33 @@
 
 
 ---
-title: 'Package ''MutSigTools'''
+title: "Package 'MutSigTools'"
 author: "Vinod Singh, Neil Coleman and Subhajyoti De"
 date: "`r Sys.Date()`"
-output: 
+output:
+  html_document:
+    df_print: paged
   pdf_document:
     citation_package: natbib
-    keep_tex: true
+    keep_tex: yes
     latex_engine: pdflatex
-linkcolor: blue
-
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
-  
+bibliography: bibliography.bib
 header-includes:
 - \usepackage{setspace}\singlespacing
 - \usepackage{float}
-
-
-
-bibliography: bibliography.bib
+linkcolor: blue
 csl: biomed-central.csl
-
-abstract:  "| . \n| **Title**: MutSigTools \n| **Type**: Package \n| **Version**: 1.0.0 \n| **Description**:
-  MutSigTools implements a wide range of generic utilities for processing and analysis of mutation signatures.
-  \n| **Author**: Vinod Kumar Singh, Neil Coleman and Subhajyoti De  \n| **Maintainer**:
-  The package maintainer <vs580@scarletmail.rutgers.edu> \n| **License**:  MIT + file LICENSE\\ \n| **Encoding**: UTF-8\n| **LazyData**: true\n|
-  **Depends**: R (>= 3.4.0), bedr, gplots, factoextra, data.table, tools, stats, GenomicRanges,
-  Biostrings, deconstructSigs. \n| **RoxygenNote**: 6.1.1 \n| **Suggests**:devtools,
-  knitr, rmarkdown.  \n| **VignetteBuilder**: knitr.  \n| **URL**: https://github.com/sjdlabgroup/MutSigTools
-  \n| **BugReports**: https://github.com/sjdlabgroup/MutSigTools/issues "
+abstract: "| . \n| **Title**: MutSigTools \n| **Type**: Package \n| **Version**: 1.0.0
+  \n| **Description**: MutSigTools implements a wide range of generic utilities for
+  processing and analysis of mutation signatures. \n| **Author**: Vinod Kumar Singh,
+  Neil Coleman and Subhajyoti De  \n| **Maintainer**: The package maintainer <vs580@scarletmail.rutgers.edu>
+  \n| **License**:  MIT + file LICENSE\\ \n| **Encoding**: UTF-8\n| **LazyData**:
+  true\n| **Depends**: R (>= 3.4.0), bedr, gplots, factoextra, data.table, tools,
+  stats, GenomicRanges, Biostrings, deconstructSigs. \n| **RoxygenNote**: 6.1.1 \n|
+  **Suggests**:devtools, knitr, rmarkdown.  \n| **VignetteBuilder**: knitr.  \n| **URL**:
+  https://github.com/sjdlabgroup/MutSigTools \n| **BugReports**: https://github.com/sjdlabgroup/MutSigTools/issues "
+vignette: |
+  %\VignetteIndexEntry{Vignette Title} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 
 \newpage
@@ -108,13 +103,15 @@ Note: `vcf file name` with no extension will be the `sample name`.
 Group mutations according to their occurrence within or outside user-annotated genomic segments.
 
 ####**Usage**
-`contextSNV(snv, file = "empty", mode = "include")`
+`contextSNV(snv, file = "empty", mode = "include",  bed_file_start_cord=0)`
 
 ####**Arguments **
 
 - [`snv`](#snv):	 A dataframe having `sample, chr, pos, ref, alt and/or freq` as its columns. This snv dataframe can be created by the [vcfToSNV](#vcfToSNV) function of this package. 
 - `file`:  Path of the `BED file`, having genomic segments and their context information.
 - `mode`:  Default: `include`: Select mutations lying inside the given genomic contexts (obtained from BED file). `exclude`: will give mutations outside the given context.
+- `bed_file_start_cord`:  Default: `0`: If BED file has 0-based coordinate system. `1`: If BED file has 1-based coordinate system.
+
 
 ####**Details**
 When the `include` mode is used, group mutations according to their occurrence in user-specified annotated genomic segments; such segments could represent specific genomic or epigenomic contexts (e.g. actively transcribed coding regions). Alternately, in the `exclude` mode, mutations in undesired regions (e.g.black-listed genomic regions) can be removed.
@@ -128,7 +125,7 @@ When the `include` mode is used, group mutations according to their occurrence i
 ```
 > BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools", mustWork = TRUE)
 > data(snv_sample)   # load 'snv' dataframe object
-> context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
+> context_snv=contextSNV(snv=snv_sample,BED_file, mode='include', bed_file_start_cord=0)
 > head(context_snv)
         sample  chr   pos ref alt
 1 CRF004556_E7 chr1 15118   A   G
@@ -363,7 +360,35 @@ Create three `PCA plots` with the following extensions to show difference among 
 > signaturePCA(sigmat, pngfile="signaturePCA")
 ```
 
-### 3.11  confidenceSig
+### 3.11  signature_tSNE
+####**Description**
+Constructs tSNE plot of mutation signatures.
+
+####**Usage**
+`signature_tSNE(sigmat, pngfile )`
+
+####**Arguments **
+
+- `sigmat`:	 An object of class `mutsig` describing a set of signatures.
+- `pngfile`:  Name of `png` formatted image file to be created.
+
+
+####**Value**
+
+Create tSNE plot to show similarity among mutational signatures.
+
+- `*_tSNE.png` : The tSNE plot file of the mutation signatures. 
+
+
+####**Examples**
+
+```
+> sigmat=signatures.cosmic
+> signature_tSNE(sigmat, pngfile="signature_tSNE")
+```
+
+
+### 3.12  confidenceSig
 
 ####**Description**
 Provides an interval of uncertainty for estimated weights of known mutation signatures in the catalog of mutations from a set of samples.
@@ -376,7 +401,7 @@ Provides an interval of uncertainty for estimated weights of known mutation sign
 - `contextfreq.sample`:	 A sample from the dataframe of class [`contextfreq`](#contextfreq) containing mutation frequency in trinucleotide contexts.
 - `subsample`:  Proportion of mutations included during each subsampling. `Default: 0.8` (80 percent)
 - `iter`:  Number of iterations of subsampling. `Default: 1000`
-- `signatures.ref`: An object of class mutsig comprising the set of signatures. Default: [signatures.cosmic](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
+- `signatures.ref`: An object of class mutsig comprising the set of signatures. (`signatures.nature2013` or `signatures.cosmic` or `signatures.cosmic.2019` ), Default: [`signatures.cosmic`](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
 - `lbound`: Lower bound of the interval of uncertainty for estimated weights of the signatures. `Default: 0.1` (10 percent)
 - `ubound`: Upper bound of the interval of uncertainty for estimated weights of the signatures. `Default: 0.9` (90 percent)
 - `replace`: should sampling be with replacement? `TRUE` or `FALSE`
@@ -403,18 +428,20 @@ signatures.ref=signatures.cosmic, lbound=0.1, ubound=0.9, replace=FALSE)
 
 ```
 
-### 3.12  persistSig
+### 3.13  persistSig
 
-Determine the burden of different mutation signatures acrross different allele frequency ranges.
+Determine the burden of different mutation signatures acrross different allele frequency ranges. The function should be used with caution; Local copy number and purity-corrected variant allele frequencies should be provided in the column 6 of the [`snv`](#vcfToSNV) object.
 
 ####**Usage**
-`persistSig(snv, th_vec_lw, th_vec_up, bsg = NULL)`
+`persistSig(snv, th_vec_lw, th_vec_up, signatures.ref ,  bsg=BSgenome.Hsapiens.UCSC.hg19::Hsapiens)`
 
 ####**Arguments **
 
 - [`snv`](#vcfToSNV):	 A dataframe having `sample, chr, pos, ref, alt and/or freq` as its columns.This dataframe may have more than one sample. 
 - `th_vec_lw`:  A vector of lower limits of frequency ranges.
 - `th_vec_up`:  A vector of upper limits of frequency ranges.
+- `signatures.ref`: An object of class mutsig comprising the set of signatures. (`signatures.nature2013` or `signatures.cosmic` or `signatures.cosmic.2019` ), Default: [`signatures.cosmic`](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
+- `bsg`:  An boject of class BSGenome. `Default:` [BSgenome.Hsapiens.UCSC.hg19::Hsapiens](https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html)
 
 
 ####**Value**
@@ -425,7 +452,7 @@ A list of samples having mutational signature corresponding to each allele frequ
 
 ```
 > data(snv_sample)   # load 'snv' dataframe object
-> mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1))  # list of samples having mutational signature for each allele frequency range i.e., in this example frequency ranges are (0.0 - 0.1) & (0.4 - 1.0).
+> mut_sig_per_freq_range=persistSig(snv=snv_sample,th_vec_lw=c(0,0.4), th_vec_up=c(0.1,1), signatures.ref = signatures.cosmic, bsg = BSgenome.Hsapiens.UCSC.hg19::Hsapiens)  # list of samples having mutational signature for each allele frequency range i.e., in this example frequency ranges are (0.0 - 0.1) & (0.4 - 1.0).
 
 > mut_sig_per_freq_range$CRF004556[,1:6] # view some signatures at different allele freq ranges
            sig.1 sig.2     sig.3 sig.4      sig.5      sig.6
@@ -435,7 +462,7 @@ A list of samples having mutational signature corresponding to each allele frequ
 ```
 
 
-### 3.13  enrichSig
+### 3.14  enrichSig
 ####**Description**
 Determine over-represented mutation signatures in individual case sample(s) relative to that in the panel of control samples. This is suitable when case samples are heterogeneous, and only some of them might have excess of certain mutation signatures of interest relative to the control population.
 
@@ -447,7 +474,7 @@ Determine over-represented mutation signatures in individual case sample(s) rela
 - `contextfreq.cases`:	A data frame of class [`contextfreq`](#contextfreq) containing mutation frequency in tri-nucleotide contexts in case samples
 
 - `contextfreq.controls`: A data frame of class [`contextfreq`](#contextfreq) containing mutation frequency in tri-nucleotide contexts in control samples.
-- `signatures.ref`: An object of class mutsig comprising the set of signatures. Default: [signatures.cosmic](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
+- `signatures.ref`: An object of class mutsig comprising the set of signatures. (`signatures.nature2013` or `signatures.cosmic` or `signatures.cosmic.2019`), Default: [`signatures.cosmic`](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
 - `threshold`:  Threshold for uncorrected percentile score. `Default: 0.05`
 
 ####**Details**
@@ -476,7 +503,7 @@ Determine over-represented mutation signatures in individual case sample(s), hig
 
 ```
 
-### 3.14  caseControlSig
+### 3.15  caseControlSig
 
 ####**Description**
 
@@ -489,7 +516,7 @@ Identifies signatures with significantly higher mutation burden in case samples 
 
 - `contextfreq.cases`:	A data frame of class [`contextfreq`](#contextfreq) containing mutation frequency in tri-nucleotide contexts in case samples
 - `contextfreq.controls`: A data frame of class [`contextfreq`](#contextfreq) containing mutation frequency in tri-nucleotide contexts in control samples.
-- `signatures.ref`: An object of class mutsig comprising the set of signatures. Default: [signatures.cosmic](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
+- `signatures.ref`: An object of class mutsig comprising the set of signatures. (`signatures.nature2013` or `signatures.cosmic` or `signatures.cosmic.2019` ), Default: [`signatures.cosmic`](https://cran.r-project.org/web/packages/deconstructSigs/deconstructSigs.pdf)
 - `threshold`:  Threshold for uncorrected percentile score. `Default: 0.05`
 - `adjust`: Method for p-value correction for multiple testing. Options are as provided in the function `p.adjust`. The default method is the `FDR` method.
 

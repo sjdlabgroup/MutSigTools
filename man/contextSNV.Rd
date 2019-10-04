@@ -4,7 +4,8 @@
 \alias{contextSNV}
 \title{Partition mutations according to their genomic contexts}
 \usage{
-contextSNV(snv, file = "empty", mode = "include")
+contextSNV(snv, file = "empty", mode = "include",
+  bed_file_start_cord = 0)
 }
 \arguments{
 \item{snv}{A dataframe having \emph{sample, chr, pos, ref, alt and/or  freq} as its columns.}
@@ -13,6 +14,8 @@ contextSNV(snv, file = "empty", mode = "include")
 
 \item{mode}{Default is set to \emph{include}: Select mutations lying inside the given genomic contexts (obtained from BED file). 
 \emph{exclude}: will give mutations outside the given context.}
+
+\item{bed_file_start_cord}{Default: \emph{0}: If BED file has 0-based cordinate system. \emph{1}: If BED file has 1-based cordinate system.}
 }
 \value{
 \emph{snv} dataframe with column names of \emph{sample, chr, pos, ref, alt, freq}. Where, sample name will be concatenated by the its genomic context. Example: if a mutation within a sample of name \emph{sample1}, lies in the context segment of label \emph{C1} given in the input \emph{bed file} , the sample name of mutation is modified to \emph{sample1_C1}. The mutations that don't lie in any context segment given in the \emph{BED} file are discarded.
@@ -28,7 +31,7 @@ BED_file=system.file("extdata", "context_testFile.bed", package = "MutSigTools",
 
 data(snv_sample.rda)   # load 'snv' dataframe object
 
-context_snv=contextSNV(snv=snv_sample,BED_file, mode='include')
+context_snv=contextSNV(snv=snv_sample,BED_file, mode='include', bed_file_start_cord=0)
 
 }
 \seealso{

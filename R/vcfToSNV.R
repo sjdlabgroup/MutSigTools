@@ -4,7 +4,7 @@
 #' 
 #' @usage vcfToSNV(vcf, allelefreq = FALSE)  
 #' @param vcf  The path of a standard vcf file.
-#' @param allelefreq A logical input, TRUE if mutation allele frequency is required in output object. Default : FALSE
+#' @param allelefreq A logical input, TRUE if mutation or variant allele frequency is required in output object. Default : FALSE
 #' @return A snv dataframe having datframe with column names as sample, chr, pos, ref, alt, freq. Where, filename will be considered as sample name. \strong{Note}: vcf file name with no extension is the sample name.
 
 #' @details Read vcf formatted file to catalog mutations in a data frame of class snv for downstream analysis foreach input sample.
